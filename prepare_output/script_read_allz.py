@@ -95,7 +95,7 @@ for j in range(0,5):
 		file_prefix = "SA_z"+str("%.2f" % redshift)
 		#output_file = "../data/MR/lgal_z"+str(i)+".pkl"
 		output_file = output_dir+"lgal_z"+str(i)+"_N"+str(j)
-		snapdir = datadir+"snapdir_0"+snapshot
+		snapdir = datadir+"snapdir_"+snapshot
 		#snapdir = datadir
 		#print(i,snapshot, file_prefix, output_file)
 	
