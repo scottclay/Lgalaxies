@@ -10,7 +10,7 @@
 # 
 import sys
 
-#datadir = '../../Hen15_Dustmodel/output/'
+
 datadir   = '../../Hen15_Dustmodel/output/'
 output_dir = './'
 
