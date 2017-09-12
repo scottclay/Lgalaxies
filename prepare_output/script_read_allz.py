@@ -38,22 +38,22 @@ start_all = time.time()
 
 
 file_prefix = {
-	0.00:58,
-	1.04:38,
-	2.07:30,
-	3.11:25,
-	3.95:22,
-	5.03:19,
-	5.92:17,
-	6.97:15,
-	8.22:13,
-	8.93:12,	
-	9.72:11,	
-	10.57:10,	
-	11.51:9,	
-	12.53:8,		
-	13.66:7,
-	14.90:6
+	0.00:"058",
+	1.04:"038",
+	2.07:"030",
+	3.11:"025",
+	3.95:"022",
+	5.03:"019",
+	5.92:"017",
+	6.97:"015",
+	8.22:"013",
+	8.93:"012",	
+	9.72:"011",	
+	10.57:"010",	
+	11.51:"009",	
+	12.53:"008",		
+	13.66:"007",
+	14.90:"006"
 	}
 
 min_redshift = 0.00
@@ -95,7 +95,7 @@ for j in range(0,5):
 		file_prefix = "SA_z"+str("%.2f" % redshift)
 		#output_file = "../data/MR/lgal_z"+str(i)+".pkl"
 		output_file = output_dir+"lgal_z"+str(i)+"_N"+str(j)
-		snapdir = datadir+"snapdir_0"+str(snapshot)
+		snapdir = datadir+"snapdir_0"+snapshot
 		#snapdir = datadir
 		#print(i,snapshot, file_prefix, output_file)
 	
