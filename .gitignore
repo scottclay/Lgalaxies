@@ -19,3 +19,6 @@ Thumbs.db
 # Jupyter NB Checkpoints #
 ######################
 .ipynb_checkpoints/
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
