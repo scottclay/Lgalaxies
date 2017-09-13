@@ -89,8 +89,11 @@ for j in range(0,5):
 		firstfile = 401
 		lastfile = 511
 
+	#firstfile = 5
+	#lastfile = 5
 		
-	for i, redshift in enumerate(desired_redshifts.keys(),int(round(min_redshift))):
+	for i, redshift in enumerate(sorted(desired_redshifts.keys()),int(round(min_redshift))):
+		print (i,redshift)
 		snapshot = desired_redshifts[redshift]
 		file_prefix = "SA_z"+str("%.2f" % redshift)
 		#output_file = "../data/MR/lgal_z"+str(i)+".pkl"
