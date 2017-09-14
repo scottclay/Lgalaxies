@@ -29,7 +29,7 @@ def read_snap(folder,file_prefix,firstfile,lastfile,props,template):
         nHalos += this_nHalos
         f.close()
     # Allocate arrays
-    print("Total nGals = ",nHalos)
+    #print("Total nGals = ",nHalos)
     nTreeHalos = np.empty(nTrees,dtype=np.int32)
     gals = np.empty(nHalos,dtype=filter_dtype)
     # Second loop to populate arrays
@@ -40,7 +40,7 @@ def read_snap(folder,file_prefix,firstfile,lastfile,props,template):
         f = open(filename,"rb")
         this_nTrees =  np.fromfile(f,np.int32,1)[0]
         this_nHalos = np.fromfile(f,np.int32,1)[0]
-        print("File ", ifile," nGals = ",this_nHalos)
+        #print("File ", ifile," nGals = ",this_nHalos)
         addednTreeHalos = np.fromfile(f,np.int32,this_nTrees)
         nTreeHalos[nTrees:nTrees+this_nTrees]=addednTreeHalos
         this_addedGalaxy = np.fromfile(f,template,this_nHalos) # all properties

@@ -74,14 +74,19 @@ def produce_df(redshift=0, data_path = '/lustre/scratch/astro/sc558/Clay17_Sept/
 	df['Fe_Dust'] = gals['Dust_elements'][:,10]
 
 	return df
-	
 
-#df = produce_df(redshift=5, data_path = '../prepare_output/')
-#import matplotlib.pyplot as plt
-#plt.scatter(np.log10(df['StellarMass']), np.log10(df['Dust_Mass']))
-#plt.show()
-
-
+# def plot_something():
+# 	plt.plot([8,11],[5,5],c='r')	
+# 	return 
+# 	
+# df = produce_df(redshift=5, data_path = '../prepare_output/')
+# import matplotlib.pyplot as plt
+# plt.scatter(np.log10(df['StellarMass']), np.log10(df['Dust_Mass']))
+# #plot_something()
+# 
+# plt.show()
+# 
+# 
 '''
 ############Read in L-Galaxies MRII data
 
