@@ -17,7 +17,7 @@ def plot_params(redshift):
 		plt.tick_params(axis='both', which='minor', labelsize=12,width=2,length=6, labelleft ='on', labelbottom='on', direction='inout')
 	
 	if(redshift==8):
-		plt.xlim([6,12.0])
+		plt.xlim([8,12.0])
 		
 	if redshift==7:
 		plt.xlabel(r'log$_{10}$(M$_{*}$/M$_{\odot}$)', fontsize=18)

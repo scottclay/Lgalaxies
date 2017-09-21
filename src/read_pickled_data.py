@@ -24,9 +24,9 @@ def read_pickled_data(redshift=0, data_path = '/lustre/scratch/astro/sc558/Clay1
 	gals_N4 = cPickle.load(file_N4)
 	file_N4.close()
 
-	gals_MR = np.hstack((gals_N0, gals_N1, gals_N2, gals_N3, gals_N4))
+	gals = np.hstack((gals_N0, gals_N1, gals_N2, gals_N3, gals_N4))
 	
-	return gals_MR
+	return gals
 
 
 def produce_df(redshift=0, data_path = '/lustre/scratch/astro/sc558/Clay17_Sept/MR/Pickled/'):
@@ -75,18 +75,28 @@ def produce_df(redshift=0, data_path = '/lustre/scratch/astro/sc558/Clay17_Sept/
 
 	return df
 
-# def plot_something():
-# 	plt.plot([8,11],[5,5],c='r')	
-# 	return 
-# 	
-# df = produce_df(redshift=5, data_path = '../prepare_output/')
-# import matplotlib.pyplot as plt
-# plt.scatter(np.log10(df['StellarMass']), np.log10(df['Dust_Mass']))
-# #plot_something()
-# 
-# plt.show()
-# 
-# 
+def fetch_lgalaxies(redshift = 0, data_path = '/lustre/scratch/astro/sc558/Clay17_Sept',simulation='MR'):
+	
+	if simulation=='MR':
+		df   = produce_df(redshift=redshift, data_path = data_path + '/MR/Pickled/')
+	elif simulation == 'MRII':
+		df = produce_df(redshift=redshift, data_path = data_path + '/MRII/Pickled/')
+	elif simulation =='both':
+		df_MR   = produce_df(redshift=redshift, data_path = data_path + '/MR/Pickled/')
+		df_MRII = produce_df(redshift=redshift, data_path = data_path + '/MRII/Pickled/')
+		df = pd.concat([df_MR,df_MRII], axis=0)
+
+	return df
+
+'''	
+df_MR = fetch_lgalaxies(redshift=5, data_path = '../prepare_output/',simulation = 'both')
+import matplotlib.pyplot as plt
+plt.scatter(np.log10(df_MR['StellarMass']), np.log10(df_MR['Dust_Mass']))
+#plot_something()
+
+plt.show()
+'''
+
 '''
 ############Read in L-Galaxies MRII data
 
