@@ -93,8 +93,8 @@ def make_selection(df,redshift=0):
     Hubble_time = 28.0/3*(1+(1+redshift)**2)*1.0E9 #years
     sSFR_cut = 1 / (3 * Hubble_time)
     
-    df_cut = df[( (df['Type']==0) & (sSFR > sSFR_cut) & (df['Dust_Mass']>0.0) )]
-
+    #df_cut = df[( (df['Type']==0) & (sSFR > sSFR_cut) & (df['Dust_Mass']>0.0) )]
+    df_cut = df[df['Dust_Mass']>0.0]
     return df_cut
     
     

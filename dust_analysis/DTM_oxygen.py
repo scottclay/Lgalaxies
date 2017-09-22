@@ -37,7 +37,7 @@ for loop in range(0,9):
 
     DM = np.log10(df['Dust_Mass'])
     SM = np.log10(df['StellarMass'])
-    MM = np.log10(df['Metal_Mass'])
+    MM = np.log10(df['Metal_Mass']+df['Dust_Mass'])
     
     OX_D = df['O_Dust']
     OX_M = df['O']
@@ -56,7 +56,7 @@ for loop in range(0,9):
     from fit_scatter import fit_median
     median, bin_centres, per_50,per_16,per_84,per_25,per_75 = fit_median(OX_Z,DTM,10)
     
-    
+    '''
     if loop == 0: 
         hb = plt.hexbin(OX_Z,DTM,gridsize=150,bins='log',mincnt=5,cmap='gist_heat')
     
@@ -66,8 +66,8 @@ for loop in range(0,9):
         print(min,max)
     else:
         plt.hexbin(OX_Z,DTM,gridsize=150,bins='log',mincnt=5,cmap='gist_heat',norm=normalize)
-    
-    plot_observations(loop)
+    '''
+    plot_observations(loop,"DTM_Oxy")
     #plt.errorbar(x_bins,y_median,yerr=(y_mederr),color='k',label='L-Galaxies Median',linewidth=2)
     
     plt.plot(bin_centres,per_50,c='k',zorder=10,linewidth=2,label='L-Galaxies')

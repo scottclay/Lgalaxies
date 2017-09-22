@@ -26,7 +26,7 @@ for loop in range(0,9):
 
 
 	#df = produce_df(redshift=loop, data_path = '../prepare_output/')
-	df = fetch_lgalaxies(redshift=loop, data_path = '../prepare_output/',simulation='both')
+	df = fetch_lgalaxies(redshift=loop, data_path = '../prepare_output/',simulation='MR')
 	df = make_selection(df,redshift=loop)
 
 	plt.subplot(3,3,loop+1)
@@ -36,13 +36,17 @@ for loop in range(0,9):
 	plot_params(loop)
 
 
-    DM = np.log10(df['Dust_Mass'])
-    SM = np.log10(df['StellarMass'])
+	DM = np.log10(df['Dust_Mass'])
+	SM = np.log10(df['StellarMass'])
+	MM = np.log10(df['Metal_Mass']+df['Dust_Mass'])
+	DTM = DM - MM
+
+	DTM = DTM.as_matrix()
 
 	from fit_scatter import fit_median
 	median, bin_centres, per_50,per_16,per_84,per_25,per_75 = fit_median(SM,DTM,10)
 	
-	
+	'''
 	if loop == 0: 
 		hb = plt.hexbin(SM,DTM,gridsize=150,bins='log',mincnt=5,cmap='gist_heat')
 	
@@ -52,8 +56,8 @@ for loop in range(0,9):
 		print(min,max)
 	else:
 		plt.hexbin(SM,DTM,gridsize=150,bins='log',mincnt=5,cmap='gist_heat',norm=normalize)
-    
-	plot_observations(loop)
+    '''
+	plot_observations(loop,"DTM_SM")
 	#plt.errorbar(x_bins,y_median,yerr=(y_mederr),color='k',label='L-Galaxies Median',linewidth=2)
 	
 	plt.plot(bin_centres,per_50,c='k',zorder=10,linewidth=2,label='L-Galaxies')

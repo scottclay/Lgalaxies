@@ -60,33 +60,56 @@ def fetch_observations():
 	#-------------Return 
 	return RR_2014, RR_2015, Santini_2014, daCunha_2015, Mancini_2015, Bourne_2012, Ciesla_2014, Wiseman_2017
 
-def plot_observations(redshift):
+def plot_observations(redshift,type):
 	
 	RR_2014, RR_2015, Santini_2014, daCunha_2015, Mancini_2015, Bourne_2012, Ciesla_2014, Wiseman_2017 = fetch_observations()
-	if(redshift == 0):
-		plt.errorbar(RR_2015['SM'], RR_2015['DM_1'], yerr = (RR_2015['DM_1_down'], RR_2015['DM_1_up']),color='g',label='Remy-Ruyer2015',fmt='.')
-		plt.errorbar(np.log10(Bourne_2012['MEDMSTAR']), np.log10(Bourne_2012['MEDMDUST']), yerr = np.log10(Bourne_2012['MEDMDUSTERR']/Bourne_2012['MEDMDUST']) , color='orange',label='Bourne2012',fmt='.')
-		plt.errorbar(Ciesla_2014['SM'], Ciesla_2014['DM'], yerr = Ciesla_2014['DM_err'] , color='r',label='Ciesla2014',fmt='.')
-		plt.errorbar(Santini_2014['SM_z0'], Santini_2014['DM_z0'], yerr = (Santini_2014['DM_down_err_z0'], Santini_2014['DM_up_err_z0']), color='b',label='Santini2014',fmt='.')
-	if(redshift == 1):
-		plt.errorbar(Santini_2014['SM_z1'], Santini_2014['DM_z1'], yerr = (Santini_2014['DM_down_err_z1'], Santini_2014['DM_up_err_z1']), color='b',label='Santini2014',fmt='.')
-	if(redshift == 2):
-		plt.errorbar(Santini_2014['SM_z2'], Santini_2014['DM_z2'], yerr = (Santini_2014['DM_down_err_z2'], Santini_2014['DM_up_err_z2']), color='b',label='Santini2014',fmt='.')
-		plt.errorbar(daCunha_2015['SM_z2'], daCunha_2015['DM_z2'], yerr = (daCunha_2015['DM_down_err_z2'], daCunha_2015['DM_up_err_z2']), color='b',label='daCunha2014',fmt='.')
-	if(redshift == 3):
-		plt.errorbar(daCunha_2015['SM_z3'], daCunha_2015['DM_z3'], yerr = (daCunha_2015['DM_down_err_z3'], daCunha_2015['DM_up_err_z3']), color='b',label='daCunha2014',fmt='.')
-	if(redshift == 4):
-		plt.errorbar(daCunha_2015['SM_z4'], daCunha_2015['DM_z4'], yerr = (daCunha_2015['DM_down_err_z4'], daCunha_2015['DM_up_err_z4']), color='b',label='daCunha2014',fmt='.')
-	if(redshift == 5):
-		plt.errorbar(daCunha_2015['SM_z5'], daCunha_2015['DM_z5'], yerr = (daCunha_2015['DM_down_err_z5'], daCunha_2015['DM_up_err_z5']), color='b',label='daCunha2014',fmt='.')
-	if(redshift == 6):
-		plt.errorbar(daCunha_2015['SM_z6'], daCunha_2015['DM_z6'], yerr = (daCunha_2015['DM_down_err_z6'], daCunha_2015['DM_up_err_z6']), color='b',label='daCunha2014',fmt='.')
-	if( (redshift == 6) or (redshift == 7) ):
-		plt.errorbar(Mancini_2015['SM'], Mancini_2015['DM'], yerr = Mancini_2015['DM_err'], xerr = Mancini_2015['SM_err'], color='g',label='Mancini2015',fmt='.')
-	return
 
-
-
-
-
+	if type == "SM_DM":
+		if(redshift == 0):
+			plt.errorbar(RR_2015['SM'], RR_2015['DM_1'], yerr = (RR_2015['DM_1_down'], RR_2015['DM_1_up']),color='g',label='Remy-Ruyer2015',fmt='.')
+			plt.errorbar(np.log10(Bourne_2012['MEDMSTAR']), np.log10(Bourne_2012['MEDMDUST']), yerr = np.log10(Bourne_2012['MEDMDUSTERR']/Bourne_2012['MEDMDUST']) , color='orange',label='Bourne2012',fmt='.')
+			plt.errorbar(Ciesla_2014['SM'], Ciesla_2014['DM'], yerr = Ciesla_2014['DM_err'] , color='r',label='Ciesla2014',fmt='.')
+			plt.errorbar(Santini_2014['SM_z0'], Santini_2014['DM_z0'], yerr = (Santini_2014['DM_down_err_z0'], Santini_2014['DM_up_err_z0']), color='b',label='Santini2014',fmt='.')
+		if(redshift == 1):
+			plt.errorbar(Santini_2014['SM_z1'], Santini_2014['DM_z1'], yerr = (Santini_2014['DM_down_err_z1'], Santini_2014['DM_up_err_z1']), color='b',label='Santini2014',fmt='.')
+		if(redshift == 2):
+			plt.errorbar(Santini_2014['SM_z2'], Santini_2014['DM_z2'], yerr = (Santini_2014['DM_down_err_z2'], Santini_2014['DM_up_err_z2']), color='b',label='Santini2014',fmt='.')
+			plt.errorbar(daCunha_2015['SM_z2'], daCunha_2015['DM_z2'], yerr = (daCunha_2015['DM_down_err_z2'], daCunha_2015['DM_up_err_z2']), color='b',label='daCunha2014',fmt='.')
+		if(redshift == 3):
+			plt.errorbar(daCunha_2015['SM_z3'], daCunha_2015['DM_z3'], yerr = (daCunha_2015['DM_down_err_z3'], daCunha_2015['DM_up_err_z3']), color='b',label='daCunha2014',fmt='.')
+		if(redshift == 4):
+			plt.errorbar(daCunha_2015['SM_z4'], daCunha_2015['DM_z4'], yerr = (daCunha_2015['DM_down_err_z4'], daCunha_2015['DM_up_err_z4']), color='b',label='daCunha2014',fmt='.')
+		if(redshift == 5):
+			plt.errorbar(daCunha_2015['SM_z5'], daCunha_2015['DM_z5'], yerr = (daCunha_2015['DM_down_err_z5'], daCunha_2015['DM_up_err_z5']), color='b',label='daCunha2014',fmt='.')
+		if(redshift == 6):
+			plt.errorbar(daCunha_2015['SM_z6'], daCunha_2015['DM_z6'], yerr = (daCunha_2015['DM_down_err_z6'], daCunha_2015['DM_up_err_z6']), color='b',label='daCunha2014',fmt='.')
+		if( (redshift == 6) or (redshift == 7) ):
+			plt.errorbar(Mancini_2015['SM'], Mancini_2015['DM'], yerr = Mancini_2015['DM_err'], xerr = Mancini_2015['SM_err'], color='g',label='Mancini2015',fmt='.')
+		return
+		
+	elif type == "DTG_SM":
+		if(redshift == 0):
+			RR_DTG1B_err = 10**RR_2015['DTG_1B'] * np.sqrt( (RR_2015['DM_1_up']/RR_2015['DM_1'])**2 + (RR_2015['HI_err']/RR_2015['HI'])**2 )
+			log_RR_DTG1B_err =0.434* (np.log10(RR_DTG1B_err)/RR_2015['DTG_1B'])
+			plt.errorbar(RR_2015['SM'], RR_2015['DTG_1B'], yerr=(log_RR_DTG1B_err), color='g',label='Remy-Ruyer+2015',fmt='o') 
+			
+	elif type == "DTG_Oxy":
+		if(redshift == 0):
+			RR_DTG1B_err = 10**RR_2015['DTG_1B'] * np.sqrt( (RR_2015['DM_1_up']/RR_2015['DM_1'])**2 + (RR_2015['HI_err']/RR_2015['HI'])**2 )
+			log_RR_DTG1B_err =0.434* (np.log10(RR_DTG1B_err)/RR_2015['DTG_1B'])
+			plt.errorbar(RR_2015['Oxygen'], RR_2015['DTG_1B'], yerr=(log_RR_DTG1B_err), color='g',label='Remy-Ruyer+2015',fmt='o') 
+			
+	elif type == "DTM_SM":
+		if(redshift == 0):
+			plt.errorbar(RR_2015['SM'], RR_2015['DTM_1B'], yerr=(0.75*RR_2015['DTM_1B']), color='g',label='Remy-Ruyer+2015',fmt='o') 
+			
+	elif type == "DTM_Oxy":
+		if(redshift == 0):
+			plt.errorbar(RR_2015['Oxygen'], RR_2015['DTM_1B'], yerr=(0.75*RR_2015['DTM_1B']), color='g',label='Remy-Ruyer+2015',fmt='o') 
+		if(redshift == 2):
+			plt.errorbar(Wiseman_2017['Metals_z2'],np.log10(Wiseman_2017['DTM_z2']*0.464), yerr = np.log10(Wiseman_2017['DTM_err_z2']/Wiseman_2017['DTM_z2']), color='g',label='Wiseman2017',fmt='o')
+		if(redshift == 3):
+			plt.errorbar(Wiseman_2017['Metals_z3'],np.log10(Wiseman_2017['DTM_z3']*0.464), yerr = np.log10(Wiseman_2017['DTM_err_z3']/Wiseman_2017['DTM_z3']), color='g',label='Wiseman2017',fmt='o')
+		if(redshift == 4):
+			plt.errorbar(Wiseman_2017['Metals_z4'],np.log10(Wiseman_2017['DTM_z4']*0.464), yerr = np.log10(Wiseman_2017['DTM_err_z4']/Wiseman_2017['DTM_z4']), color='g',label='Wiseman2017',fmt='o')
 

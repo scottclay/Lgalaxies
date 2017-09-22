@@ -45,7 +45,7 @@ for loop in range(0,9):
 	from fit_scatter import fit_median
 	median, bin_centres, per_50,per_16,per_84,per_25,per_75 = fit_median(SM,DTG,10)
 	
-	
+	'''
 	if loop == 0: 
 		hb = plt.hexbin(SM,DTG,gridsize=150,bins='log',mincnt=5,cmap='gist_heat')
 	
@@ -55,8 +55,8 @@ for loop in range(0,9):
 		print(min,max)
 	else:
 		plt.hexbin(SM,DTG,gridsize=150,bins='log',mincnt=5,cmap='gist_heat',norm=normalize)
-    
-	plot_observations(loop)
+    '''
+	plot_observations(loop,"DTG_SM")
 	#plt.errorbar(x_bins,y_median,yerr=(y_mederr),color='k',label='L-Galaxies Median',linewidth=2)
 	
 	plt.plot(bin_centres,per_50,c='k',zorder=10,linewidth=2,label='L-Galaxies')
