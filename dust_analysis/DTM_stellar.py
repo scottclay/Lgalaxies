@@ -22,29 +22,29 @@ fig.subplots_adjust(hspace=0)
 fig.subplots_adjust(wspace=0)
 
 for loop in range(0,9):
-#for loop in range(0,1):
-
-
-	#df = produce_df(redshift=loop, data_path = '../prepare_output/')
-	df = fetch_lgalaxies(redshift=loop, data_path = '../prepare_output/',simulation='MR')
-	df = make_selection(df,redshift=loop)
+	try: 
+		bin_centres,median,per_50,per_16,per_84,per_25,per_75 = np.loadtxt('./binned_data/DTM_stellar_'+str(loop)+'.txt',unpack=True,comments='#')
+	except IOError:
+		print("Missing data - will create")
+		df = fetch_lgalaxies(redshift=loop, data_path = '../prepare_output/',simulation='MR')
+		df = make_selection(df,redshift=loop)
+		DM = np.log10(df['Dust_Mass'])
+		SM = np.log10(df['StellarMass'])
+		MM = np.log10(df['Metal_Mass']+df['Dust_Mass'])
+	    
+		DTM = DM - MM
+	
+		DTM = DTM.as_matrix()
+	
+		from fit_scatter import fit_median
+		median, bin_centres, per_50,per_16,per_84,per_25,per_75 = fit_median(SM,DTM,10)
+		np.savetxt('./binned_data/DTM_stellar_'+str(loop)+'.txt',np.c_[bin_centres,median,per_50,per_16,per_84,per_25,per_75])
 
 	plt.subplot(3,3,loop+1)
 	plt.xlim([8.,11.98])
 	plt.ylim([-3.98,2])
 	
 	plot_params(loop)
-
-
-	DM = np.log10(df['Dust_Mass'])
-	SM = np.log10(df['StellarMass'])
-	MM = np.log10(df['Metal_Mass']+df['Dust_Mass'])
-	DTM = DM - MM
-
-	DTM = DTM.as_matrix()
-
-	from fit_scatter import fit_median
-	median, bin_centres, per_50,per_16,per_84,per_25,per_75 = fit_median(SM,DTM,10)
 	
 	'''
 	if loop == 0: 
