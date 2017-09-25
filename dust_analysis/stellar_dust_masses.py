@@ -1,8 +1,12 @@
-import numpy as np
+import matplotlib
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
+import numpy as np
 import pylab
 import sys
-import matplotlib
+import numpy as np
+
+
 
 sys.path.append('../data/')
 sys.path.append('../src/')
