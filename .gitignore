@@ -4,7 +4,8 @@
 read_data_pandas_hdf5/peter_examples/*
 *.pyc
 *~
-*/figs/
+*.png
+*.txt
 
 # OS generated files #
 ######################
