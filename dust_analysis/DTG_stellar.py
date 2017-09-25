@@ -13,6 +13,7 @@ from fetch_observations import plot_observations
 from fit_scatter import fit_scatter
 from read_pickled_data import produce_df
 from read_pickled_data import fetch_lgalaxies
+from read_pickled_data import make_selection
 from plot_params import plot_params
 
 #col_maps=['afmhot','autumn','bone','cool','copper','gist_heat','gray','spring','winter']
