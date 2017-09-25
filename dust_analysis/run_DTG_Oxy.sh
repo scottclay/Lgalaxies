@@ -15,7 +15,7 @@ module load mps/software/
 module load python/3.4.3
 source /lustre/scratch/astro/ds381/yt-x86_64/bin/activate
 
-cd /home/s/sc/sc558/Lgalaxies_Analysis/
-#$ -o /home/s/sc/sc558/Lgalaxies_Analysis/apollo/DTG_Oxy_plot.log
-#$ -e /home/s/sc/sc558/Lgalaxies_Analysis/apollo/DTG_Oxy_plot.elog
+cd /home/s/sc/sc558/Lgalaxies_Analysis/dust_analysis/
+#$ -o /home/s/sc/sc558/Lgalaxies_Analysis/dust_analysis/apollo/DTG_Oxy_plot.log
+#$ -e /home/s/sc/sc558/Lgalaxies_Analysis/dust_analysis/apollo/DTG_Oxy_plot.elog
 python DTG_oxygen.py
