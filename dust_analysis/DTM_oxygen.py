@@ -1,8 +1,10 @@
-import numpy as np
+import matplotlib
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
+import numpy as np
 import pylab
 import sys
-import matplotlib
+import numpy as np
 
 sys.path.append('../data/')
 sys.path.append('../src/')
@@ -27,7 +29,8 @@ for loop in range(0,9):
 		bin_centres,median,per_50,per_16,per_84,per_25,per_75 = np.loadtxt('./binned_data/DTM_oxygen_'+str(loop)+'.txt',unpack=True,comments='#')
 	except IOError:
 		print("Missing data - will create")
-		df = fetch_lgalaxies(redshift=loop, data_path = '../prepare_output/',simulation='MR')
+		#df = fetch_lgalaxies(redshift=loop, data_path = '../prepare_output/',simulation='MR')
+		df = fetch_lgalaxies(redshift=loop,simulation='MR')
 		df = make_selection(df,redshift=loop)
 		DM = np.log10(df['Dust_Mass'])
 		SM = np.log10(df['StellarMass'])
