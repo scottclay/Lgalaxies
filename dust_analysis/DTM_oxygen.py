@@ -51,7 +51,12 @@ for loop in range(0,9):
 		median, bin_centres, per_50,per_16,per_84,per_25,per_75 = fit_median(OX_Z,DTM,10)
 		np.savetxt('./binned_data/DTM_oxygen_'+str(loop)+'.txt',np.c_[bin_centres,median,per_50,per_16,per_84,per_25,per_75])
 
-    
+	plt.subplot(3,3,loop+1)
+	plt.xlim([8.,11.98])
+	plt.ylim([-3.98,2])
+	
+	plot_params(loop)
+
 	'''
 	if loop == 0: 
 		hb = plt.hexbin(OX_Z,DTM,gridsize=150,bins='log',mincnt=5,cmap='gist_heat')
