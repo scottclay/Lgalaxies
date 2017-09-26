@@ -52,8 +52,8 @@ for loop in range(0,9):
 		np.savetxt('./binned_data/DTM_oxygen_'+str(loop)+'.txt',np.c_[bin_centres,median,per_50,per_16,per_84,per_25,per_75])
 
 	plt.subplot(3,3,loop+1)
-	plt.xlim([8.,11.98])
-	plt.ylim([-3.98,2])
+	plt.xlim([6.,9.98])
+	plt.ylim([-2.98,1])
 	
 	plot_params(loop)
 
