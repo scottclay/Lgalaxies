@@ -107,9 +107,9 @@ def plot_observations(redshift,type):
 		if(redshift == 0):
 			plt.errorbar(RR_2015['Oxygen'], RR_2015['DTM_1B'], yerr=(0.75*RR_2015['DTM_1B']), color='g',label='Remy-Ruyer+2015',fmt='o') 
 		if(redshift == 2):
-			plt.errorbar(Wiseman_2017['Metals_z2'],np.log10(Wiseman_2017['DTM_z2']*0.464), yerr = np.log10(Wiseman_2017['DTM_err_z2']/Wiseman_2017['DTM_z2']), color='g',label='Wiseman2017',fmt='o')
+			plt.errorbar(Wiseman_2017['Metals_z2'],np.log10(Wiseman_2017['DTM_z2']*0.464), yerr = np.log10(Wiseman_2017['DTM_err_z2']/Wiseman_2017['DTM_z2']), color='r',label='Wiseman2017',fmt='o')
 		if(redshift == 3):
-			plt.errorbar(Wiseman_2017['Metals_z3'],np.log10(Wiseman_2017['DTM_z3']*0.464), yerr = np.log10(Wiseman_2017['DTM_err_z3']/Wiseman_2017['DTM_z3']), color='g',label='Wiseman2017',fmt='o')
+			plt.errorbar(Wiseman_2017['Metals_z3'],np.log10(Wiseman_2017['DTM_z3']*0.464), yerr = np.log10(Wiseman_2017['DTM_err_z3']/Wiseman_2017['DTM_z3']), color='r',label='Wiseman2017',fmt='o')
 		if(redshift == 4):
-			plt.errorbar(Wiseman_2017['Metals_z4'],np.log10(Wiseman_2017['DTM_z4']*0.464), yerr = np.log10(Wiseman_2017['DTM_err_z4']/Wiseman_2017['DTM_z4']), color='g',label='Wiseman2017',fmt='o')
-
+			plt.errorbar(Wiseman_2017['Metals_z4'],np.log10(Wiseman_2017['DTM_z4']*0.464), yerr = np.log10(Wiseman_2017['DTM_err_z4']/Wiseman_2017['DTM_z4']), color='r',label='Wiseman2017',fmt='o')
+		
