@@ -34,14 +34,15 @@ for loop in range(0,9):
 		df = make_selection(df,redshift=loop)
 		DM = np.log10(df['Dust_Mass'])
 		SM = np.log10(df['StellarMass'])
-		MM = np.log10(df['Metal_Mass']+df['Dust_Mass'])
+		#MM = np.log10(df['Metal_Mass']+df['Dust_Mass'])
+		MM = np.log10(df['Metal_Mass'])
 	
 		OX_D = df['O_Dust']
 		OX_M = df['O']
 		Hyd = df['H']
         
 		OX_Z = np.log10   (( (OX_D + OX_M) /Hyd) * (1.0/16.0)) + 12.0
-
+		OX_Z = np.log10   (( (OX_D) /Hyd) * (1.0/16.0)) + 12.0
     
 		DTM = DM - MM
 	
@@ -50,12 +51,15 @@ for loop in range(0,9):
 		from fit_scatter import fit_median
 		median, bin_centres, per_50,per_16,per_84,per_25,per_75 = fit_median(OX_Z,DTM,10)
 		np.savetxt('./binned_data/DTM_oxygen_'+str(loop)+'.txt',np.c_[bin_centres,median,per_50,per_16,per_84,per_25,per_75])
+		#Metallicity_bins,Ratio_bins,Ratio_std_dev,Ratio_std_err,count,Ratio_median, Ratio_mederr = fit_scatter(OX_Z, DTM, ret_n=True, ret_sterr=True, ret_median=True, nbins=20)
+
+
 
 	plt.subplot(3,3,loop+1)
 	plt.xlim([6.,9.98])
 	plt.ylim([-2.98,1])
 	
-	plot_params(loop)
+	plot_params(loop,'O','DTM')
 
 	'''
 	if loop == 0: 
@@ -74,7 +78,7 @@ for loop in range(0,9):
 	plt.plot(bin_centres,per_50,c='k',zorder=10,linewidth=2,label='L-Galaxies')
 	plt.plot(bin_centres,per_16,'k--',zorder=10,linewidth=2)
 	plt.plot(bin_centres,per_84,'k--',zorder=10,linewidth=2)
-
+	#plt.errorbar(Metallicity_bins,Ratio_median,yerr=(Ratio_mederr),color='b',label='L-Galaxies Median',linewidth=2)
 
 	#plt.text(8.2,1.0,"z = "+str(loop), fontsize = 16)
 	if loop==8:

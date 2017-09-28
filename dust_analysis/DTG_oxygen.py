@@ -26,8 +26,8 @@ for loop in range(0,9):
 		bin_centres,median,per_50,per_16,per_84,per_25,per_75 = np.loadtxt('./binned_data/DTG_oxygen_'+str(loop)+'.txt',unpack=True,comments='#')
 	except IOError:
 		print("Missing data - will create")
-		#df = fetch_lgalaxies(redshift=loop, data_path = '../prepare_output/',simulation='MR')
-		df = fetch_lgalaxies(redshift=loop,simulation='MR')
+		df = fetch_lgalaxies(redshift=loop, data_path = '../prepare_output/',simulation='MR')
+		#df = fetch_lgalaxies(redshift=loop,simulation='MR')
 		df = make_selection(df,redshift=loop)
 		DM = np.log10(df['Dust_Mass'])
 		SM = np.log10(df['StellarMass'])
@@ -38,7 +38,7 @@ for loop in range(0,9):
 		Hyd = df['H']
         
 		OX_Z = np.log10   (( (OX_D + OX_M) /Hyd) * (1.0/16.0)) + 12.0
-
+		OX_Z = np.log10   (( (OX_D) /Hyd) * (1.0/16.0)) + 12.0
     
 		DTG = DM - CG
 	
@@ -53,7 +53,7 @@ for loop in range(0,9):
 	plt.xlim([6.,9.98])
 	plt.ylim([-5.98,-1.])
 
-	plot_params(loop)
+	plot_params(loop,'O','DTG')
 
 	'''
 	if loop == 0: 

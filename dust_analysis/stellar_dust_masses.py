@@ -28,8 +28,8 @@ for loop in range(0,9):
 		bin_centres,median,per_50,per_16,per_84,per_25,per_75 = np.loadtxt('./binned_data/SM_DM_'+str(loop)+'.txt',unpack=True,comments='#')
 	except IOError:
 		print("Missing data - will create")
-		#df = fetch_lgalaxies(redshift=loop, data_path = '../prepare_output/',simulation='MR')
-		df = fetch_lgalaxies(redshift=loop,simulation='MR')
+		df = fetch_lgalaxies(redshift=loop, data_path = '../prepare_output/',simulation='MR')
+		#df = fetch_lgalaxies(redshift=loop,simulation='MR')
 		df = make_selection(df,redshift=loop)
 		DM = np.log10(df[df['Dust_Mass']>0.0]['Dust_Mass'])
 		SM = np.log10(df[df['Dust_Mass']>0.0]['StellarMass'])
@@ -46,7 +46,7 @@ for loop in range(0,9):
 	plt.xlim([8,11.97])
 	plt.ylim([0,9.98])
 	
-	plot_params(loop)
+	plot_params(loop,'SM','DM')
 	'''
 	if plot_hist == "yes":
 		if loop == 0: 
