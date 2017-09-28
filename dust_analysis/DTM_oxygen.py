@@ -27,10 +27,10 @@ for loop in range(0,9):
 
 	try: 
 		bin_centres,median,per_50,per_16,per_84,per_25,per_75 = np.loadtxt('./binned_data/DTM_oxygen_'+str(loop)+'.txt',unpack=True,comments='#')
-	except IOError:
+	except FileNotFoundError:
 		print("Missing data - will create")
-		#df = fetch_lgalaxies(redshift=loop, data_path = '../prepare_output/',simulation='MR')
-		df = fetch_lgalaxies(redshift=loop,simulation='MR')
+		df = fetch_lgalaxies(redshift=loop, data_path = '../prepare_output/',simulation='MR')
+		#df = fetch_lgalaxies(redshift=loop,simulation='MR')
 		df = make_selection(df,redshift=loop)
 		DM = np.log10(df['Dust_Mass'])
 		SM = np.log10(df['StellarMass'])
