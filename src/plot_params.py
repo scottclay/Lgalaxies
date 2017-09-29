@@ -35,5 +35,6 @@ def plot_params(redshift, x_axis = 'SM', y_axis = 'DM'):
 			plt.ylabel(r'12 + log$_{10}$(O/H)', fontsize=18)
 		if y_axis == "CG":
 			plt.ylabel(r'log$_{10}$(M$_{\rm{CG}}$/M$_{\odot}$)', fontsize=18)
-			
+		if y_axis == "DRate":
+			plt.ylabel(r'Dust production rate M$_{\odot}$yr$^{-1}$', fontsize=18)			
 	return
