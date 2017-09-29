@@ -108,7 +108,10 @@ def make_selection(df,redshift=0):
 #X_one  = X.loc[y['Class'] ==1]
 
 
-
+#df = fetch_lgalaxies(redshift = 0, data_path = '../prepare_output/',simulation='MR')
+#print(df['O'].min())
+#print(df['O_Dust'].min())
+#print( (df['O'] + df['O_Dust']).min())
 
 '''    
 df_MR = fetch_lgalaxies(redshift=5, data_path = '../prepare_output/',simulation = 'both')

@@ -42,7 +42,7 @@ for loop in range(0,9):
 		Hyd = df['H']
         
 		OX_Z = np.log10   (( (OX_D + OX_M) /Hyd) * (1.0/16.0)) + 12.0
-		OX_Z = np.log10   (( (OX_D) /Hyd) * (1.0/16.0)) + 12.0
+		OX_Z = np.log10   (( (OX_M) /Hyd) * (1.0/16.0)) + 12.0
     
 		DTM = DM - MM
 	

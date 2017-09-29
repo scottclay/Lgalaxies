@@ -23,37 +23,32 @@ fig.subplots_adjust(wspace=0)
 for loop in range(0,9):
 
 	try: 
-		bin_centres,median,per_50,per_16,per_84,per_25,per_75 = np.loadtxt('./binned_data/DTG_oxygen_'+str(loop)+'.txt',unpack=True,comments='#')
+		bin_centres,median,per_50,per_16,per_84,per_25,per_75 = np.loadtxt('./binned_data/CG_oxygen_'+str(loop)+'.txt',unpack=True,comments='#')
 	except IOError:
 		print("Missing data - will create")
 		df = fetch_lgalaxies(redshift=loop, data_path = '../prepare_output/',simulation='MR')
 		#df = fetch_lgalaxies(redshift=loop,simulation='MR')
 		df = make_selection(df,redshift=loop)
-		DM = np.log10(df['Dust_Mass'])
-		SM = np.log10(df['StellarMass'])
 		CG = np.log10(df['ColdGas'])
 	
-		OX_D = df['O_Dust']
 		OX_M = df['O']
 		Hyd = df['H']
         
-		OX_Z = np.log10   (( (OX_D + OX_M) /Hyd) * (1.0/16.0)) + 12.0
 		OX_Z = np.log10   (( (OX_M) /Hyd) * (1.0/16.0)) + 12.0
     
-		DTG = DM - CG
-	
-		DTG = DTG.as_matrix()
-	
+		CG = CG.as_matrix()
+		OX_Z = OX_Z.as_matrix()
 		from fit_scatter import fit_median
-		median, bin_centres, per_50,per_16,per_84,per_25,per_75 = fit_median(OX_Z,DTG,10)
-		np.savetxt('./binned_data/DTG_oxygen_'+str(loop)+'.txt',np.c_[bin_centres,median,per_50,per_16,per_84,per_25,per_75])
+		median, bin_centres, per_50,per_16,per_84,per_25,per_75 = fit_median(OX_Z,CG,10)
+		#median, bin_centres, per_50,per_16,per_84,per_25,per_75 = fit_median(CG,OX_Z,10)
+		np.savetxt('./binned_data/CG_oxygen_'+str(loop)+'.txt',np.c_[bin_centres,median,per_50,per_16,per_84,per_25,per_75])
 
 
 	plt.subplot(3,3,loop+1)
 	plt.xlim([6.,9.98])
-	plt.ylim([-5.98,-1.])
+	plt.ylim([8,11.97])
 
-	plot_params(loop,'O','DTG')
+	plot_params(loop,'O','CG')
 
 	'''
 	if loop == 0: 
@@ -67,7 +62,7 @@ for loop in range(0,9):
 		plt.hexbin(OX_Z,DTG,gridsize=150,bins='log',mincnt=5,cmap='gist_heat',norm=normalize)
 	'''
 
-	plot_observations(loop,"DTG_Oxy")
+	#plot_observations(loop,"DTG_Oxy")
 
 	plt.plot(bin_centres,per_50,c='k',zorder=10,linewidth=2,label='L-Galaxies')
 	plt.plot(bin_centres,per_16,'k--',zorder=10,linewidth=2)
@@ -81,7 +76,7 @@ axes = fig.get_axes()
 for ax in axes:
     [i.set_linewidth(2.1) for i in ax.spines.values()]
 
-pylab.savefig('./figs/DTG_oxygen.png', bbox_inches=0)
+pylab.savefig('./figs/CG_oxygen.png', bbox_inches=0)
 plt.close()
     
 
