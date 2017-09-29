@@ -56,13 +56,22 @@ def fetch_observations():
 	Wiseman_z4 = pd.read_table(observation_path+'wiseman2016_z4.txt',sep='\t',comment='#',index_col=False,names=['z_z4','SM_z4','SM_uperr_z4','SM_downerr_z4','SFR_z4','SFR_err_z4','Metals_z4','Metals_err_z4','DTM_z4','DTM_err_z4'])
 
 	Wiseman_2017 = pd.concat((Wiseman_z2,Wiseman_z3,Wiseman_z4),axis=1)
-	
+
+	#-------------Clemens2013
+	Clemens_2013 = pd.read_table(observation_path+'Clemens2013.txt',sep='\t',comment='#',index_col=False,names=['DM', 'Phi', 'Phi_up_err', 'Phi_down_err'])
+
+	#-------------VlahakisA_2005
+	VlahakisA_2005 = pd.read_table(observation_path+'Vlahakis2005A.txt',sep='\t',comment='#',index_col=False,names=['DM', 'Phi', 'Phi_up_err', 'Phi_down_err'])
+
+	#-------------VlahakisA_2005
+	VlahakisB_2005 = pd.read_table(observation_path+'Vlahakis2005B.txt',sep='\t',comment='#',index_col=False,names=['DM', 'Phi', 'Phi_up_err', 'Phi_down_err'])
+
 	#-------------Return 
-	return RR_2014, RR_2015, Santini_2014, daCunha_2015, Mancini_2015, Bourne_2012, Ciesla_2014, Wiseman_2017
+	return RR_2014, RR_2015, Santini_2014, daCunha_2015, Mancini_2015, Bourne_2012, Ciesla_2014, Wiseman_2017, Clemens_2013, VlahakisA_2005, VlahakisB_2005
 
 def plot_observations(redshift,type):
 	
-	RR_2014, RR_2015, Santini_2014, daCunha_2015, Mancini_2015, Bourne_2012, Ciesla_2014, Wiseman_2017 = fetch_observations()
+	RR_2014, RR_2015, Santini_2014, daCunha_2015, Mancini_2015, Bourne_2012, Ciesla_2014, Wiseman_2017, Clemens_2013, VlahakisA_2005, VlahakisB_2005 = fetch_observations()
 
 	if type == "SM_DM":
 		if(redshift == 0):
@@ -85,8 +94,11 @@ def plot_observations(redshift,type):
 			plt.errorbar(daCunha_2015['SM_z6'], daCunha_2015['DM_z6'], yerr = (daCunha_2015['DM_down_err_z6'], daCunha_2015['DM_up_err_z6']), color='b',label='daCunha2014',fmt='.')
 		if( (redshift == 6) or (redshift == 7) ):
 			plt.errorbar(Mancini_2015['SM'], Mancini_2015['DM'], yerr = Mancini_2015['DM_err'], xerr = Mancini_2015['SM_err'], color='g',label='Mancini2015',fmt='.')
-		return
-		
+	if type == "DMF":
+		if(redshift == 0):
+			plt.errorbar(VlahakisA_2005['DM'] ,np.log10(VlahakisA_2005['Phi']) ,yerr=(np.log10(VlahakisA_2005['Phi_up_err']/VlahakisA_2005['Phi']),np.log10(VlahakisA_2005['Phi_down_err']/VlahakisA_2005['Phi'])) ,color='g',label='VlahakisA+2005',fmt='o')
+			plt.errorbar(VlahakisB_2005['DM'] ,np.log10(VlahakisB_2005['Phi']) ,yerr=(np.log10(VlahakisB_2005['Phi_up_err']/VlahakisB_2005['Phi']),np.log10(VlahakisB_2005['Phi_down_err']/VlahakisB_2005['Phi'])) ,color='g',label='VlahakisB+2005',fmt='o')
+			plt.errorbar(Clemens_2013['DM'], Clemens_2013['Phi'], yerr = (Clemens_2013['Phi_down_err'],Clemens_2013['Phi_up_err']),color='b',label='Clemens+2013',fmt='o')    
 	elif type == "DTG_SM":
 		if(redshift == 0):
 			RR_DTG1B_err = 10**RR_2015['DTG_1B'] * np.sqrt( (RR_2015['DM_1_up']/RR_2015['DM_1'])**2 + (RR_2015['HI_err']/RR_2015['HI'])**2 )
@@ -112,4 +124,11 @@ def plot_observations(redshift,type):
 			plt.errorbar(Wiseman_2017['Metals_z3'],np.log10(Wiseman_2017['DTM_z3']*0.464), yerr = np.log10(Wiseman_2017['DTM_err_z3']/Wiseman_2017['DTM_z3']), color='r',label='Wiseman2017',fmt='o')
 		if(redshift == 4):
 			plt.errorbar(Wiseman_2017['Metals_z4'],np.log10(Wiseman_2017['DTM_z4']*0.464), yerr = np.log10(Wiseman_2017['DTM_err_z4']/Wiseman_2017['DTM_z4']), color='r',label='Wiseman2017',fmt='o')
+		
+		
+
+		
+		
+		
+		
 		

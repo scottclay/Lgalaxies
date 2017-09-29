@@ -1,5 +1,5 @@
 import matplotlib.pyplot as plt
-def plot_params(redshift, x_axis = 'SM', y_axis = 'DM'):
+def plot_params(redshift, x_axis = 'none', y_axis = 'none'):
 	if(redshift==1 or redshift==2 or redshift==4 or redshift==5):
 		plt.tick_params(axis='both', which='major', labelsize=12,width=2,length=6, labelleft ='off', labelbottom='off', direction='inout')
 		plt.tick_params(axis='both', which='minor', labelsize=12,width=2,length=6, labelleft ='off', labelbottom='off', direction='inout')
