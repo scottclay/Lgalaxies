@@ -5,8 +5,9 @@ import numpy as np
 import pylab
 import sys
 import numpy as np
+import matplotlib.collections
 
-
+import cloudpickle
 
 sys.path.append('../data/')
 sys.path.append('../src/')
@@ -19,6 +20,7 @@ from read_pickled_data import make_selection
 from plot_params import plot_params
 
 fig, axs = plt.subplots(nrows=3, ncols=3, sharex=True, sharey=True, figsize=(9,9))
+ax = axs.reshape(-1)
 fig.subplots_adjust(hspace=0)
 fig.subplots_adjust(wspace=0)
 
@@ -46,20 +48,25 @@ for loop in range(0,9):
 	plt.xlim([8,11.97])
 	plt.ylim([0,9.98])
 	
-	plot_params(loop,'SM','DM')
-	'''
-	if plot_hist == "yes":
+	try: 
+		ax[loop] = cloudpickle.load(open('./pkl_hists/SM_DM_z'+str(loop)+'.pickle','rb'))
+	except:
+		print("generating hists")
 		if loop == 0: 
 			hb = plt.hexbin(SM,DM,gridsize=150,bins='log',mincnt=5,cmap='gist_heat')
-	
+
 			min = hb.norm.vmin
 			max = hb.norm.vmax
 			normalize = matplotlib.colors.Normalize(vmin=min, vmax=max)
 			print(min,max)
 		else:
 			plt.hexbin(SM,DM,gridsize=150,bins='log',mincnt=5,cmap='gist_heat',norm=normalize)
-	'''    
-
+		import pickle   
+	
+		fout = open('./pkl_hists/SM_DM_z'+str(loop)+'.pkl','wb')
+		cloudpickle.dump(ax[loop],fout)
+	
+	plot_params(loop,'SM','DM')
 	plot_observations(loop,"SM_DM")
 	
 	plt.plot(bin_centres,per_50,c='k',zorder=10,linewidth=2,label='L-Galaxies')
@@ -75,7 +82,7 @@ axes = fig.get_axes()
 for ax in axes:
     [i.set_linewidth(2.1) for i in ax.spines.values()]
 
-pylab.savefig('./figs/stellar_dust_mass.png', bbox_inches=0)
+pylab.savefig('./figs/SM_DM.png', bbox_inches=0)
 plt.close()
     
 
