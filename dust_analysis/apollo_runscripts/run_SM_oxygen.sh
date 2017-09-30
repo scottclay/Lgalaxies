@@ -16,8 +16,8 @@ module load python/3.4.3
 source /lustre/scratch/astro/ds381/yt-x86_64/bin/activate
 
 cd /home/s/sc/sc558/Lgalaxies_Analysis/dust_analysis/
-rm /home/s/sc/sc558/Lgalaxies_Analysis/dust_analysis/apollo/SM_oxygen.log
-rm /home/s/sc/sc558/Lgalaxies_Analysis/dust_analysis/apollo/SM_oxygen.elog
-#$ -o /home/s/sc/sc558/Lgalaxies_Analysis/dust_analysis/apollo/SM_oxygen.log
-#$ -e /home/s/sc/sc558/Lgalaxies_Analysis/dust_analysis/apollo/SM_oxygen.elog
+rm -f /home/s/sc/sc558/Lgalaxies_Analysis/dust_analysis/logs/SM_oxygen.log
+rm -f /home/s/sc/sc558/Lgalaxies_Analysis/dust_analysis/logs/SM_oxygen.elog
+#$ -o /home/s/sc/sc558/Lgalaxies_Analysis/dust_analysis/logs/SM_oxygen.log
+#$ -e /home/s/sc/sc558/Lgalaxies_Analysis/dust_analysis/logs/SM_oxygen.elog
 python SM_oxygen.py

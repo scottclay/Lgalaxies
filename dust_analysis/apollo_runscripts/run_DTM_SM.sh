@@ -16,8 +16,8 @@ module load python/3.4.3
 source /lustre/scratch/astro/ds381/yt-x86_64/bin/activate
 
 cd /home/s/sc/sc558/Lgalaxies_Analysis/dust_analysis/
-rm /home/s/sc/sc558/Lgalaxies_Analysis/dust_analysis/apollo/DTM_SM_plot.log
-rm /home/s/sc/sc558/Lgalaxies_Analysis/dust_analysis/apollo/DTM_SM_plot.elog
-#$ -o /home/s/sc/sc558/Lgalaxies_Analysis/dust_analysis/apollo/DTM_SM_plot.log
-#$ -e /home/s/sc/sc558/Lgalaxies_Analysis/dust_analysis/apollo/DTM_SM_plot.elog
+rm -f /home/s/sc/sc558/Lgalaxies_Analysis/dust_analysis/logs/DTM_SM_plot.log
+rm -f /home/s/sc/sc558/Lgalaxies_Analysis/dust_analysis/logs/DTM_SM_plot.elog
+#$ -o /home/s/sc/sc558/Lgalaxies_Analysis/dust_analysis/logs/DTM_SM_plot.log
+#$ -e /home/s/sc/sc558/Lgalaxies_Analysis/dust_analysis/logs/DTM_SM_plot.elog
 python DTM_stellar.py

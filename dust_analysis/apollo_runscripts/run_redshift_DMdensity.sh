@@ -16,8 +16,8 @@ module load python/3.4.3
 source /lustre/scratch/astro/ds381/yt-x86_64/bin/activate
 
 cd /home/s/sc/sc558/Lgalaxies_Analysis/dust_analysis/
-rm /home/s/sc/sc558/Lgalaxies_Analysis/dust_analysis/apollo/redshift_DMdensity.log
-rm /home/s/sc/sc558/Lgalaxies_Analysis/dust_analysis/apollo/redshift_DMdensity.elog
-#$ -o /home/s/sc/sc558/Lgalaxies_Analysis/dust_analysis/apollo/redshift_DMdensity.log
-#$ -e /home/s/sc/sc558/Lgalaxies_Analysis/dust_analysis/apollo/redshift_DMdensity.elog
+rm -f /home/s/sc/sc558/Lgalaxies_Analysis/dust_analysis/logs/redshift_DMdensity.log
+rm -f /home/s/sc/sc558/Lgalaxies_Analysis/dust_analysis/logs/redshift_DMdensity.elog
+#$ -o /home/s/sc/sc558/Lgalaxies_Analysis/dust_analysis/logs/redshift_DMdensity.log
+#$ -e /home/s/sc/sc558/Lgalaxies_Analysis/dust_analysis/logs/redshift_DMdensity.elog
 python redshift_DMdensity.py
