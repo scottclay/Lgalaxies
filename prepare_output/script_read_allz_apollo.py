@@ -148,7 +148,7 @@ for j in range(0,5):
 		elif str(sys.argv[1]) == 'MRII': 
 			mass_limit = 10**6.5
 		
-		gals_to_save =gals[gals['StellarMass']*1.0E10/0.673>mass_limit]
+		gals_to_save =gals#[gals['StellarMass']*1.0E10/0.673>mass_limit]
 	
 	
 		import pickle as cPickle
