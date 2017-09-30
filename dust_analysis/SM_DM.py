@@ -43,29 +43,28 @@ for loop in range(0,9):
 		from fit_scatter import fit_median
 		median, bin_centres, per_50,per_16,per_84,per_25,per_75 = fit_median(SM,DM,10)
 		np.savetxt('./binned_data/SM_DM_'+str(loop)+'.txt',np.c_[bin_centres,median,per_50,per_16,per_84,per_25,per_75])
+		
+		try: 
+			ax[loop] = cloudpickle.load(open('./pkl_hists/SM_DM_z'+str(loop)+'.pickle','rb'))
+		except:
+			print("generating hists")
+			if loop == 0: 
+				hb = plt.hexbin(SM,DM,gridsize=150,bins='log',mincnt=5,cmap='gist_heat')
+				min = hb.norm.vmin
+				max = hb.norm.vmax
+				normalize = matplotlib.colors.Normalize(vmin=min, vmax=max)
+				print(min,max)
+			else:
+				plt.hexbin(SM,DM,gridsize=150,bins='log',mincnt=5,cmap='gist_heat',norm=normalize)
+			import pickle   
+	
+			fout = open('./pkl_hists/SM_DM_z'+str(loop)+'.pkl','wb')
+			cloudpickle.dump(ax[loop],fout)
 
 	plt.subplot(3,3,loop+1)
 	plt.xlim([8,11.97])
 	plt.ylim([0,9.98])
-	
-	try: 
-		ax[loop] = cloudpickle.load(open('./pkl_hists/SM_DM_z'+str(loop)+'.pickle','rb'))
-	except:
-		print("generating hists")
-		if loop == 0: 
-			hb = plt.hexbin(SM,DM,gridsize=150,bins='log',mincnt=5,cmap='gist_heat')
-
-			min = hb.norm.vmin
-			max = hb.norm.vmax
-			normalize = matplotlib.colors.Normalize(vmin=min, vmax=max)
-			print(min,max)
-		else:
-			plt.hexbin(SM,DM,gridsize=150,bins='log',mincnt=5,cmap='gist_heat',norm=normalize)
-		import pickle   
-	
-		fout = open('./pkl_hists/SM_DM_z'+str(loop)+'.pkl','wb')
-		cloudpickle.dump(ax[loop],fout)
-	
+		
 	plot_params(loop,'SM','DM')
 	plot_observations(loop,"SM_DM")
 	
@@ -84,9 +83,3 @@ for ax in axes:
 
 pylab.savefig('./figs/SM_DM.png', bbox_inches=0)
 plt.close()
-    
-
-
-
-
-plt.show()
