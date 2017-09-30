@@ -5,8 +5,7 @@ import numpy as np
 import pylab
 import sys
 import numpy as np
-
-
+import cloudpickle
 
 sys.path.append('../data/')
 sys.path.append('../src/')
@@ -19,8 +18,8 @@ from read_pickled_data import make_selection
 from plot_params import plot_params
 from fit_scatter import fit_median
 
-
 fig, axs = plt.subplots(nrows=3, ncols=3, sharex=True, sharey=True, figsize=(9,9))
+ax = axs.reshape(-1)
 fig.subplots_adjust(hspace=0)
 fig.subplots_adjust(wspace=0)
 
@@ -35,8 +34,8 @@ for loop in range(0,9):
 	
 	except IOError:
 		print("Missing data - will create")
-		df = fetch_lgalaxies(redshift=loop, data_path = '../prepare_output/',simulation='MR')
-		#df = fetch_lgalaxies(redshift=loop,simulation='MR')
+		#df = fetch_lgalaxies(redshift=loop, data_path = '../prepare_output/',simulation='MR')
+		df = fetch_lgalaxies(redshift=loop,simulation='MR')
 		df = make_selection(df,redshift=loop)
 		
 		SM = np.log10(df[df['Dust_Mass']>0.0]['StellarMass'])

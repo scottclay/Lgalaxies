@@ -28,8 +28,8 @@ for loop in range(0,9):
 		bin_centers,hist = np.loadtxt('./binned_data/DMF_z'+str(loop)+'.txt',unpack=True,comments='#')
 	except IOError:
 		print("Missing data - will create")
-		df = fetch_lgalaxies(redshift=loop, data_path = '../prepare_output/',simulation='MR')
-		#df = fetch_lgalaxies(redshift=loop,simulation='MR')
+		#df = fetch_lgalaxies(redshift=loop, data_path = '../prepare_output/',simulation='MR')
+		df = fetch_lgalaxies(redshift=loop,simulation='MR')
 		df = make_selection(df,redshift=loop)
 		DM = np.log10(df[df['Dust_Mass']>0.0]['Dust_Mass'])
 		

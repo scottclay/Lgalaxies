@@ -7,7 +7,7 @@
 #$ -q mps.q
 
 # Give the job a name
-#$ -N SM_DM_plot
+#$ -N SM_oxygen
 
 source /etc/profile
 shopt -s expand_aliases
@@ -16,6 +16,8 @@ module load python/3.4.3
 source /lustre/scratch/astro/ds381/yt-x86_64/bin/activate
 
 cd /home/s/sc/sc558/Lgalaxies_Analysis/dust_analysis/
-#$ -o /home/s/sc/sc558/Lgalaxies_Analysis/dust_analysis/apollo/SM_DM_plot.log
-#$ -e /home/s/sc/sc558/Lgalaxies_Analysis/dust_analysis/apollo/SM_DM_plot.elog
-python stellar_dust_masses.py
+rm /home/s/sc/sc558/Lgalaxies_Analysis/dust_analysis/apollo/SM_oxygen.log
+rm /home/s/sc/sc558/Lgalaxies_Analysis/dust_analysis/apollo/SM_oxygen.elog
+#$ -o /home/s/sc/sc558/Lgalaxies_Analysis/dust_analysis/apollo/SM_oxygen.log
+#$ -e /home/s/sc/sc558/Lgalaxies_Analysis/dust_analysis/apollo/SM_oxygen.elog
+python SM_oxygen.py

@@ -5,6 +5,7 @@ import numpy as np
 import pylab
 import sys
 import numpy as np
+import cloudpickle
 
 sys.path.append('../data/')
 sys.path.append('../src/')
@@ -15,8 +16,10 @@ from read_pickled_data import produce_df
 from read_pickled_data import fetch_lgalaxies
 from read_pickled_data import make_selection
 from plot_params import plot_params
+from fit_scatter import fit_median
 
 fig, axs = plt.subplots(nrows=3, ncols=3, sharex=True, sharey=True, figsize=(9,9))
+ax = axs.reshape(-1)
 fig.subplots_adjust(hspace=0)
 fig.subplots_adjust(wspace=0)
 
@@ -26,8 +29,8 @@ for loop in range(0,9):
 		bin_centres,median,per_50,per_16,per_84,per_25,per_75 = np.loadtxt('./binned_data/CG_oxygen_'+str(loop)+'.txt',unpack=True,comments='#')
 	except IOError:
 		print("Missing data - will create")
-		df = fetch_lgalaxies(redshift=loop, data_path = '../prepare_output/',simulation='MR')
-		#df = fetch_lgalaxies(redshift=loop,simulation='MR')
+		#df = fetch_lgalaxies(redshift=loop, data_path = '../prepare_output/',simulation='MR')
+		df = fetch_lgalaxies(redshift=loop,simulation='MR')
 		df = make_selection(df,redshift=loop)
 		CG = np.log10(df['ColdGas'])
 	
@@ -38,29 +41,32 @@ for loop in range(0,9):
     
 		CG = CG.as_matrix()
 		OX_Z = OX_Z.as_matrix()
-		from fit_scatter import fit_median
+
 		median, bin_centres, per_50,per_16,per_84,per_25,per_75 = fit_median(OX_Z,CG,10)
 		#median, bin_centres, per_50,per_16,per_84,per_25,per_75 = fit_median(CG,OX_Z,10)
 		np.savetxt('./binned_data/CG_oxygen_'+str(loop)+'.txt',np.c_[bin_centres,median,per_50,per_16,per_84,per_25,per_75])
-
+		try: 
+			ax[loop] = cloudpickle.load(open('./pkl_hists/CG_oxygen_z'+str(loop)+'.pickle','rb'))
+		except:
+			print("generating hists")
+			if loop == 0: 
+				hb = plt.hexbin(OX_Z,CG,gridsize=150,bins='log',mincnt=5,cmap='gist_heat')
+				min = hb.norm.vmin
+				max = hb.norm.vmax
+				normalize = matplotlib.colors.Normalize(vmin=min, vmax=max)
+				print(min,max)
+			else:
+				plt.hexbin(OX_Z,CG,gridsize=150,bins='log',mincnt=5,cmap='gist_heat',norm=normalize)
+			import pickle   
+	
+			fout = open('./pkl_hists/CG_oxygen_z'+str(loop)+'.pkl','wb')
+			cloudpickle.dump(ax[loop],fout)
 
 	plt.subplot(3,3,loop+1)
 	plt.xlim([6.,9.98])
 	plt.ylim([8,11.97])
 
 	plot_params(loop,'O','CG')
-
-	'''
-	if loop == 0: 
-		hb = plt.hexbin(OX_Z,DTG,gridsize=150,bins='log',mincnt=5,cmap='gist_heat')
-
-		min = hb.norm.vmin
-		max = hb.norm.vmax
-		normalize = matplotlib.colors.Normalize(vmin=min, vmax=max)
-		print(min,max)
-	else:
-		plt.hexbin(OX_Z,DTG,gridsize=150,bins='log',mincnt=5,cmap='gist_heat',norm=normalize)
-	'''
 
 	#plot_observations(loop,"DTG_Oxy")
 
