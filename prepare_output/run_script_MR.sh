@@ -20,4 +20,4 @@ module load python/2.7.8
 source /lustre/scratch/astro/ds381/yt-x86_64/bin/activate
 
 cd /home/s/sc/sc558/Lgalaxies_Analysis/prepare_output/
-python script_read_allz.py MR
+python script_read_allz_apollo.py MR

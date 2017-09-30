@@ -6,6 +6,8 @@ read_data_pandas_hdf5/peter_examples/*
 *~
 *.png
 *.txt
+dust_analysis/apollo/
+
 
 # OS generated files #
 ######################
