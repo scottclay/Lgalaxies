@@ -113,60 +113,6 @@ def make_selection(df,redshift=0):
 #print(df['O_Dust'].min())
 #print( (df['O'] + df['O_Dust']).min())
 
-'''    
-df_MR = fetch_lgalaxies(redshift=5, data_path = '../prepare_output/',simulation = 'both')
-import matplotlib.pyplot as plt
-plt.scatter(np.log10(df_MR['StellarMass']), np.log10(df_MR['Dust_Mass']))
-#plot_something()
-
-plt.show()
-'''
-
-'''
-############Read in L-Galaxies MRII data
-
-fin_N5 = open('/lustre/scratch/astro/sc558/Clay17/MRII_May/Pickled/lgal_z'+str(loop)+'_MRII_N0.pkl','rb')
-gals_N5=cPickle.load(fin_N5)
-fin_N5.close()
-print "Read in pickeled MRII file 0"
-
-fin_N6 = open('/lustre/scratch/astro/sc558/Clay17/MRII_May/Pickled/lgal_z'+str(loop)+'_MRII_N1.pkl','rb')
-gals_N6=cPickle.load(fin_N6)
-fin_N6.close()
-print "Read in pickeled MRII file 1"
-
-fin_N7 = open('/lustre/scratch/astro/sc558/Clay17/MRII_May/Pickled/lgal_z'+str(loop)+'_MRII_N2.pkl','rb')
-gals_N7=cPickle.load(fin_N7)
-fin_N7.close()
-print "Read in pickeled MRII file 2"
-
-fin_N8 = open('/lustre/scratch/astro/sc558/Clay17/MRII_May/Pickled/lgal_z'+str(loop)+'_MRII_N3.pkl','rb')
-gals_N8=cPickle.load(fin_N8)
-fin_N8.close()
-print "Read in pickeled MRII file 3"
-
-fin_N9 = open('/lustre/scratch/astro/sc558/Clay17/MRII_May/Pickled/lgal_z'+str(loop)+'_MRII_N4.pkl','rb')
-gals_N9=cPickle.load(fin_N9)
-fin_N9.close()
-print "Read in pickeled MRII file 4"
-
-  
-  #########
-print "Combining MR files...(slow)"
-#gals = np.concatenate(gals_N0, gals_N1, gals_N2, gals_N3, gals_N4)
-print "Combining MRII files...(slower)"
-gals_MRII = np.hstack((gals_N5, gals_N6, gals_N7, gals_N8, gals_N9))
-#gals_5MRII = np.repeat(gals_MRII,5)
-print "Combining all files...(slowest)"
-if loop==0 or loop==1 or loop==2 or loop==3 or loop==4 or loop==5:
-    gals = np.hstack((gals_MR[gals_MR['StellarMass']>0.212821286], gals_MRII[gals_MRII['StellarMass']<0.212821286]))
-else:
-    gals = gals_MRII
-print "Combining files complete."
-'''
-
-
-
 
 
 
