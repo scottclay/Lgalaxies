@@ -15,9 +15,9 @@
 source /etc/profile
 shopt -s expand_aliases
 module load mps/software/
-module load python/2.7.8
+module load python/3.4.3
 #source /home/s/sc/sc558/my_python_stack/bin/activate
-source /lustre/scratch/astro/ds381/yt-x86_64/bin/activate
+source /lustre/scratch/astro/sc558/my_python/bin/activate
 
 cd /home/s/sc/sc558/Lgalaxies_Analysis/prepare_output/
 python script_read_allz_apollo.py MR
