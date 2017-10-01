@@ -1,3 +1,4 @@
+rm ~/Lgalaxies_Analysis/dust_analysis/logs/*
 qsub run_SM_DM.sh
 qsub run_DTG_Oxy.sh
 qsub run_DTG_SM.sh

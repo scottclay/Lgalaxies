@@ -16,6 +16,6 @@ module load python/3.4.3
 source /lustre/scratch/astro/sc558/my_python/bin/activate
 
 cd /home/s/sc/sc558/Lgalaxies_Analysis/dust_analysis/
-#$ -oo /home/s/sc/sc558/Lgalaxies_Analysis/dust_analysis/logs/DTM_Oxy_plot.log
+#$ -o /home/s/sc/sc558/Lgalaxies_Analysis/dust_analysis/logs/DTM_Oxy_plot.log
 #$ -eo /home/s/sc/sc558/Lgalaxies_Analysis/dust_analysis/logs/DTM_Oxy_plot.elog
 python DTM_oxygen.py
