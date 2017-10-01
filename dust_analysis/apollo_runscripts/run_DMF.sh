@@ -16,8 +16,6 @@ module load python/3.4.3
 source /lustre/scratch/astro/sc558/my_python/bin/activate
 
 cd /home/s/sc/sc558/Lgalaxies_Analysis/dust_analysis/
-rm -f /home/s/sc/sc558/Lgalaxies_Analysis/dust_analysis/logs/DMF.log
-rm -f /home/s/sc/sc558/Lgalaxies_Analysis/dust_analysis/logs/DMF.elog
-#$ -o /home/s/sc/sc558/Lgalaxies_Analysis/dust_analysis/logs/DMF_plot.log
-#$ -e /home/s/sc/sc558/Lgalaxies_Analysis/dust_analysis/logs/DMF_plot.elog
+#$ -oo /home/s/sc/sc558/Lgalaxies_Analysis/dust_analysis/logs/DMF_plot.log
+#$ -eo /home/s/sc/sc558/Lgalaxies_Analysis/dust_analysis/logs/DMF_plot.elog
 python DMF.py

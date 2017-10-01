@@ -1,10 +1,11 @@
-qsub run1.sh
-qsub run2.sh
-qsub run3.sh
-qsub run4.sh
-qsub run5.sh
-qsub run6.sh
-qsub run7.sh
-
-
-
+qsub run_SM_DM.sh
+qsub run_DTG_Oxy.sh
+qsub run_DTG_SM.sh
+qsub run_DTM_Oxy.sh
+qsub run_DTM_SM.sh
+qsub run_SM_oxygen.sh
+qsub run_DMF.sh
+qsub run_redshift_DMdensity.sh
+qsub run_redshift_DRate.sh
+qsub run_SM_DRate.sh
+qsub run_SM_oxygen.sh
