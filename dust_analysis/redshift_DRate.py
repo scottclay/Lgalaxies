@@ -39,9 +39,9 @@ except IOError:
 	DustRate_ALL  = []
 	SFR_density  = []
 	for loop in range(0,9):
-		df = fetch_lgalaxies(redshift=loop, data_path = '../prepare_output/',simulation='MR')
+		#df = fetch_lgalaxies(redshift=loop, data_path = '../prepare_output/',simulation='MR')
 		df = fetch_lgalaxies(redshift=loop,simulation='MR')
-		#df = make_selection(df,redshift=loop)
+		df = make_selection(df,redshift=loop)
 	
 		SM = np.log10(df[df['Dust_Mass']>0.0]['StellarMass'])
 		
