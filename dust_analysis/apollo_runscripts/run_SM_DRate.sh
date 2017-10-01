@@ -17,5 +17,5 @@ source /lustre/scratch/astro/sc558/my_python/bin/activate
 
 cd /home/s/sc/sc558/Lgalaxies_Analysis/dust_analysis/
 #$ -o /home/s/sc/sc558/Lgalaxies_Analysis/dust_analysis/logs/SM_DRate.log
-#$ -eo /home/s/sc/sc558/Lgalaxies_Analysis/dust_analysis/logs/SM_DRate.elog
+#$ -e /home/s/sc/sc558/Lgalaxies_Analysis/dust_analysis/logs/SM_DRate.elog
 python SM_DRate.py
