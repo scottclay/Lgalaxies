@@ -27,6 +27,10 @@ for loop in range(0,9):
 
 	try: 
 		bin_centres,median,per_50,per_16,per_84,per_25,per_75 = np.loadtxt('./binned_data/DTG_oxygen_'+str(loop)+'.txt',unpack=True,comments='#')
+		try: 
+			ax[loop] = cloudpickle.load(open('./pkl_hists/DTG_oxygen_z'+str(loop)+'.pkl','rb'))
+		except IOError:
+		    	pass
 	except IOError:
 		print("Missing data - will create")
 		#df = fetch_lgalaxies(redshift=loop, data_path = '../prepare_output/',simulation='MR')
@@ -50,7 +54,7 @@ for loop in range(0,9):
 		median, bin_centres, per_50,per_16,per_84,per_25,per_75 = fit_median(OX_Z,DTG,10)
 		np.savetxt('./binned_data/DTG_oxygen_'+str(loop)+'.txt',np.c_[bin_centres,median,per_50,per_16,per_84,per_25,per_75])
 		try: 
-			ax[loop] = cloudpickle.load(open('./pkl_hists/DTG_oxygen_z'+str(loop)+'.pickle','rb'))
+			ax[loop] = cloudpickle.load(open('./pkl_hists/DTG_oxygen_z'+str(loop)+'.pkl','rb'))
 		except:
 			print("generating hists")
 			if loop == 0: 
