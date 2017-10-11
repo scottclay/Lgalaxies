@@ -26,6 +26,7 @@ fig.subplots_adjust(hspace=0)
 fig.subplots_adjust(wspace=0)
 
 for loop in range(0,9):
+    '''   
     try: 
         bin_centres,median,per_50,per_16,per_84,per_25,per_75 = np.loadtxt('./binned_data/SM_DM_'+str(loop)+'.txt',unpack=True,comments='#')
         try: 
@@ -60,12 +61,12 @@ for loop in range(0,9):
     
             fout = open('./pkl_hists/SM_DM_z'+str(loop)+'.pkl','wb')
             cloudpickle.dump(ax[loop],fout)
-                        
-    #try: 
-    #    bin_centres,median,per_50,per_16,per_84,per_25,per_75 = np.loadtxt('./binned_data/SM_DM_'+str(loop)+'.txt',unpack=True,comments='#')
-    #    ax[loop] = cloudpickle.load(open('./pkl_hists/SM_DM_z'+str(loop)+'.pkl','rb'))
-    #except IOError:
-    #    bin_centres,median,per_50,per_16,per_84,per_25,per_75 = bin_data('StellarMass','Dust_Mass',ax,loop,'SM_DM',nbins=10)
+    '''                        
+    try: 
+        bin_centres,median,per_50,per_16,per_84,per_25,per_75 = np.loadtxt('./binned_data/SM_DM_'+str(loop)+'.txt',unpack=True,comments='#')
+        ax[loop] = cloudpickle.load(open('./pkl_hists/SM_DM_z'+str(loop)+'.pkl','rb'))
+    except IOError:
+        bin_centres,median,per_50,per_16,per_84,per_25,per_75 = bin_data('StellarMass','Dust_Mass',ax,loop,'SM_DM',nbins=10)
           
     plt.subplot(3,3,loop+1)
     plt.xlim([8,11.97])
