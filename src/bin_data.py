@@ -22,8 +22,8 @@ def bin_data(var1,var2,ax,normalize,redshift,filename,nbins=10):
     #df = fetch_lgalaxies(redshift=redshift,simulation='MR')
     df = make_selection(df,redshift=redshift)
 
-    x = np.log10(df[var1])
-    y = np.log10(df[var2])
+    x = df[var1]
+    y = df[var2]
     
     x = x.as_matrix()
     y = y.as_matrix()

@@ -31,7 +31,7 @@ for loop in range(0,9):
         bin_centres,median,per_50,per_16,per_84,per_25,per_75 = np.loadtxt('./binned_data/SM_DM_z'+str(loop)+'.txt',unpack=True,comments='#')
         ax[loop] = cloudpickle.load(open('./pkl_hists/SM_DM_z'+str(loop)+'.pkl','rb'))
     except IOError:
-        bin_centres,median,per_50,per_16,per_84,per_25,per_75,normalize = bin_data('StellarMass','Dust_Mass',ax,normalize,loop,'SM_DM',nbins=30)
+        bin_centres,median,per_50,per_16,per_84,per_25,per_75,normalize = bin_data('SM','DM',ax,normalize,loop,'SM_DM',nbins=30)
           
     plt.subplot(3,3,loop+1)
     plt.xlim([8,11.97])

@@ -75,7 +75,15 @@ def produce_df(redshift=0, data_path = '/lustre/scratch/astro/sc558/Clay17_Sept/
     df['S_Dust']  = gals['Dust_elements'][:,8]
     df['Ca_Dust'] = gals['Dust_elements'][:,9]
     df['Fe_Dust'] = gals['Dust_elements'][:,10]
-
+    
+    df['SM'] = np.log10(df['StellarMass'])
+    df['DM'] = np.log10(df['Dust_Mass'])
+    df['MM'] = np.log10(df['Metal_Mass'])
+    df['CG'] = np.log10(df['ColdGas'])
+    df['OX_Z'] = np.log10((df['O']/df['H']) * (1.0/16.0)) + 12.0
+    df['DTG'] = df['DM'] - df['CG']   
+    df['DTM'] = df['DM'] - df['MM']   
+    
     return df
 
 def fetch_lgalaxies(redshift = 0, data_path = '/lustre/scratch/astro/sc558/Clay17_Sept',simulation='MR'):
