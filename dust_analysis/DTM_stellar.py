@@ -45,20 +45,20 @@ for loop in range(0,9):
 		DTM = DTM.as_matrix()
 	
 		from fit_scatter import fit_median
-		median, bin_centres, per_50,per_16,per_84,per_25,per_75 = fit_median(SM,DTM,10)
+		median, bin_centres, per_50,per_16,per_84,per_25,per_75 = fit_median(SM,DTM,30)
 		np.savetxt('./binned_data/DTM_stellar_'+str(loop)+'.txt',np.c_[bin_centres,median,per_50,per_16,per_84,per_25,per_75])
 		try: 
 			ax[loop] = cloudpickle.load(open('./pkl_hists/DTM_stellar_z'+str(loop)+'.pkl','rb'))
 		except:
 			print("generating hists")
 			if loop == 0: 
-				hb = plt.hexbin(SM,DTM,gridsize=150,bins='log',mincnt=5,cmap='gist_heat')
+				hb = plt.hexbin(SM,DTM,gridsize=150,bins='log',mincnt=5,cmap='gist_gray')
 				min = hb.norm.vmin
 				max = hb.norm.vmax
 				normalize = matplotlib.colors.Normalize(vmin=min, vmax=max)
 				print(min,max)
 			else:
-				plt.hexbin(SM,DTM,gridsize=150,bins='log',mincnt=5,cmap='gist_heat',norm=normalize)
+				plt.hexbin(SM,DTM,gridsize=150,bins='log',mincnt=5,cmap='gist_gray',norm=normalize)
 			import pickle   
 	
 			fout = open('./pkl_hists/DTM_stellar_z'+str(loop)+'.pkl','wb')

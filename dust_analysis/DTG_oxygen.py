@@ -51,20 +51,20 @@ for loop in range(0,9):
 	
 		DTG = DTG.as_matrix()
 	
-		median, bin_centres, per_50,per_16,per_84,per_25,per_75 = fit_median(OX_Z,DTG,10)
+		median, bin_centres, per_50,per_16,per_84,per_25,per_75 = fit_median(OX_Z,DTG,30)
 		np.savetxt('./binned_data/DTG_oxygen_'+str(loop)+'.txt',np.c_[bin_centres,median,per_50,per_16,per_84,per_25,per_75])
 		try: 
 			ax[loop] = cloudpickle.load(open('./pkl_hists/DTG_oxygen_z'+str(loop)+'.pkl','rb'))
 		except:
 			print("generating hists")
 			if loop == 0: 
-				hb = plt.hexbin(OX_Z,DTG,gridsize=150,bins='log',mincnt=5,cmap='gist_heat')
+				hb = plt.hexbin(OX_Z,DTG,gridsize=150,bins='log',mincnt=5,cmap='gist_gray')
 				min = hb.norm.vmin
 				max = hb.norm.vmax
 				normalize = matplotlib.colors.Normalize(vmin=min, vmax=max)
 				print(min,max)
 			else:
-				plt.hexbin(OX_Z,DTG,gridsize=150,bins='log',mincnt=5,cmap='gist_heat',norm=normalize)
+				plt.hexbin(OX_Z,DTG,gridsize=150,bins='log',mincnt=5,cmap='gist_gray',norm=normalize)
 			import pickle   
 	
 			fout = open('./pkl_hists/DTG_oxygen_z'+str(loop)+'.pkl','wb')
