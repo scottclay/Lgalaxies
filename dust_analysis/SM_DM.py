@@ -45,11 +45,6 @@ for loop in range(0,9):
     ax[loop].plot(bin_centres,per_16,'k--',zorder=10,linewidth=2)
     ax[loop].plot(bin_centres,per_84,'k--',zorder=10,linewidth=2)
     
-    
-    #plt.text(8.2,1.0,"z = "+str(loop), fontsize = 16)
-    #if loop==8:
-    #    plt.legend(loc='lower right',fontsize = 8)
-
 axes = fig.get_axes()
 for ax in axes:
     [i.set_linewidth(2.1) for i in ax.spines.values()]
