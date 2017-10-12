@@ -34,34 +34,16 @@ for loop in range(0,9):
     except IOError:
         bin_centres,median,per_50,per_16,per_84,per_25,per_75,normalize = bin_data('OX_Z','DTM',ax,normalize,loop,'OX_DTM',nbins=30)
 
-    plt.subplot(3,3,loop+1)
-    plt.xlim([6.,9.98])
-    plt.ylim([-2.98,1])
+    ax[loop].set_xlim([6.,9.98])
+    ax[loop].set_ylim([-2.98,1])
     
-    plot_params(loop,'O','DTM')
+    plot_params(ax[loop],loop,'O','DTM')
+    plot_observations(ax[loop],loop,"DTM_Oxy")
+    #ax[loop].errorbar(x_bins,y_median,yerr=(y_mederr),color='k',label='L-Galaxies Median',linewidth=2)
 
-    '''
-    if loop == 0: 
-        hb = plt.hexbin(OX_Z,DTM,gridsize=150,bins='log',mincnt=5,cmap='gist_heat')
-
-        min = hb.norm.vmin
-        max = hb.norm.vmax
-        normalize = matplotlib.colors.Normalize(vmin=min, vmax=max)
-        print(min,max)
-    else:
-        plt.hexbin(OX_Z,DTM,gridsize=150,bins='log',mincnt=5,cmap='gist_heat',norm=normalize)
-    '''
-    plot_observations(loop,"DTM_Oxy")
-    #plt.errorbar(x_bins,y_median,yerr=(y_mederr),color='k',label='L-Galaxies Median',linewidth=2)
-
-    plt.plot(bin_centres,per_50,c='k',zorder=10,linewidth=2,label='L-Galaxies')
-    plt.plot(bin_centres,per_16,'k--',zorder=10,linewidth=2)
-    plt.plot(bin_centres,per_84,'k--',zorder=10,linewidth=2)
-    #plt.errorbar(Metallicity_bins,Ratio_median,yerr=(Ratio_mederr),color='b',label='L-Galaxies Median',linewidth=2)
-
-    #plt.text(8.2,1.0,"z = "+str(loop), fontsize = 16)
-    if loop==8:
-        plt.legend(loc='lower right',fontsize = 8)
+    ax[loop].plot(bin_centres,per_50,c='k',zorder=10,linewidth=2,label='L-Galaxies')
+    ax[loop].plot(bin_centres,per_16,'k--',zorder=10,linewidth=2)
+    ax[loop].plot(bin_centres,per_84,'k--',zorder=10,linewidth=2)
 
 axes = fig.get_axes()
 for ax in axes:

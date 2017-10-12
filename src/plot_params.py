@@ -24,6 +24,8 @@ def plot_params(ax, redshift, x_axis = 'none', y_axis = 'none'):
 			ax.set_xlabel(r'log$_{10}$(M$_{*}$/M$_{\odot}$)', fontsize=18)
 		if x_axis == "O":
 			ax.set_xlabel(r'12 + log$_{10}$(O/H)', fontsize=18)
+		if x_axis == "DMF":
+			ax.set_xlabel(r'log$_{10}$(M$_{\rm{D}}$/M$_{\odot}$)', fontsize=18)
 	if redshift==3:
 		if y_axis == "DM":
 			ax.set_ylabel(r'log$_{10}$(M$_{\rm{D}}$/M$_{\odot}$)', fontsize=18)
@@ -37,4 +39,6 @@ def plot_params(ax, redshift, x_axis = 'none', y_axis = 'none'):
 			ax.set_ylabel(r'log$_{10}$(M$_{\rm{CG}}$/M$_{\odot}$)', fontsize=18)
 		if y_axis == "DRate":
 			ax.set_ylabel(r'Dust production rate M$_{\odot}$yr$^{-1}$', fontsize=18)			
+		if x_axis == "DMF":
+			ax.set_ylabel(r'log$_{10}$($\Phi$)[Mpc$^{-3}$ dex$^{-1}$]', fontsize=18)
 	return

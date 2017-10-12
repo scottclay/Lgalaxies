@@ -47,4 +47,18 @@ def bin_data(var1,var2,ax,normalize,redshift,filename,nbins=10):
     return bin_centres,median,per_50,per_16,per_84,per_25,per_75,normalize
 
 
+def bin_highz_data(var1,var2,redshift,filename,nbins=10):
+    df = fetch_lgalaxies(redshift=redshift, data_path = '../prepare_output/',simulation='MR')
+    #df = fetch_lgalaxies(redshift=redshift,simulation='MR')
+    df = make_selection(df,redshift=redshift)
 
+    x = df[var1]
+    y = df[var2]
+    
+    x = x.as_matrix()
+    y = y.as_matrix()
+
+    median, bin_centres, per_50, per_16, per_84, per_25, per_75 = fit_median(x,y,nbins)
+    np.savetxt('./binned_data/'+filename+'_z'+str(redshift)+'.txt',np.c_[bin_centres,median,per_50,per_16,per_84,per_25,per_75])
+
+    return bin_centres,median,per_50,per_16,per_84,per_25,per_75

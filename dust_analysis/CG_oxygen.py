@@ -36,21 +36,16 @@ for loop in range(0,9):
 
 
 
-    plt.subplot(3,3,loop+1)
-    plt.xlim([6.,9.98])
-    plt.ylim([8,11.97])
+    ax[loop].set_xlim([6.,9.98])
+    ax[loop].set_ylim([8,11.97])
 
-    plot_params(loop,'O','CG')
+    plot_params(ax[loop],loop,'O','CG')
 
-    #plot_observations(loop,"DTG_Oxy")
-
-    plt.plot(bin_centres,per_50,c='k',zorder=10,linewidth=2,label='L-Galaxies')
-    plt.plot(bin_centres,per_16,'k--',zorder=10,linewidth=2)
-    plt.plot(bin_centres,per_84,'k--',zorder=10,linewidth=2)
+    ax[loop].plot(bin_centres,per_50,c='k',zorder=10,linewidth=2,label='L-Galaxies')
+    ax[loop].plot(bin_centres,per_16,'k--',zorder=10,linewidth=2)
+    ax[loop].plot(bin_centres,per_84,'k--',zorder=10,linewidth=2)
 
 
-    if loop==8:
-        plt.legend(loc='lower right',fontsize = 8)
 
 axes = fig.get_axes()
 for ax in axes:

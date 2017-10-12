@@ -34,33 +34,16 @@ for loop in range(0,9):
         bin_centres,median,per_50,per_16,per_84,per_25,per_75,normalize = bin_data('OX_Z','DTG',ax,normalize,loop,'OX_DTG',nbins=30)
 
 
-    plt.subplot(3,3,loop+1)
-    plt.xlim([6.,9.98])
-    plt.ylim([-5.98,-1.])
+    ax[loop].set_xlim([6.,9.98])
+    ax[loop].set_ylim([-5.98,-1.])
 
-    plot_params(loop,'O','DTG')
+    plot_params(ax[loop],loop,'O','DTG')
+    plot_observations(ax[loop],loop,"DTG_Oxy")
 
-    '''
-    if loop == 0: 
-        hb = plt.hexbin(OX_Z,DTG,gridsize=150,bins='log',mincnt=5,cmap='gist_heat')
+    ax[loop].plot(bin_centres,per_50,c='k',zorder=10,linewidth=2,label='L-Galaxies')
+    ax[loop].plot(bin_centres,per_16,'k--',zorder=10,linewidth=2)
+    ax[loop].plot(bin_centres,per_84,'k--',zorder=10,linewidth=2)
 
-        min = hb.norm.vmin
-        max = hb.norm.vmax
-        normalize = matplotlib.colors.Normalize(vmin=min, vmax=max)
-        print(min,max)
-    else:
-        plt.hexbin(OX_Z,DTG,gridsize=150,bins='log',mincnt=5,cmap='gist_heat',norm=normalize)
-    '''
-
-    plot_observations(loop,"DTG_Oxy")
-
-    plt.plot(bin_centres,per_50,c='k',zorder=10,linewidth=2,label='L-Galaxies')
-    plt.plot(bin_centres,per_16,'k--',zorder=10,linewidth=2)
-    plt.plot(bin_centres,per_84,'k--',zorder=10,linewidth=2)
-
-
-    if loop==8:
-        plt.legend(loc='lower right',fontsize = 8)
 
 axes = fig.get_axes()
 for ax in axes:

@@ -41,7 +41,6 @@ for loop in range(0,9):
 
 
 
-    #plt.subplot(3,3,loop+1)
     ax[loop].set_xlim([6.,9.98])
     ax[loop].set_ylim([0,9.98])
 
@@ -59,14 +58,6 @@ for loop in range(0,9):
     	#ax[loop].scatter(RR_2015['Oxygen'], RR_2015['DM_1'], color='g')
         ax[loop].errorbar(RR_2015['Oxygen'], RR_2015['DM_1'], yerr = (RR_2015['DM_1_down'], RR_2015['DM_1_up']),color='g',label='Remy-Ruyer2015',fmt='.')
 
-    #print (RR_2015.head(5))
-    print(ax)
-    print(axs)
-    print(axs.ravel())
-
-
-    #if loop==8:
-    #    plt.legend(loc='lower right',fontsize = 8)
 
 axes = fig.get_axes()
 for ax in axes:

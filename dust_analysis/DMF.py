@@ -19,6 +19,7 @@ from read_pickled_data import make_selection
 from plot_params import plot_params
 
 fig, axs = plt.subplots(nrows=3, ncols=3, sharex=True, sharey=True, figsize=(9,9))
+ax = axs.reshape(-1)
 fig.subplots_adjust(hspace=0)
 fig.subplots_adjust(wspace=0)
 
@@ -28,8 +29,8 @@ for loop in range(0,9):
 		bin_centers,hist = np.loadtxt('./binned_data/DMF_z'+str(loop)+'.txt',unpack=True,comments='#')
 	except IOError:
 		print("Missing data - will create")
-		#df = fetch_lgalaxies(redshift=loop, data_path = '../prepare_output/',simulation='MR')
-		df = fetch_lgalaxies(redshift=loop,simulation='MR')
+		df = fetch_lgalaxies(redshift=loop, data_path = '../prepare_output/',simulation='MR')
+		#df = fetch_lgalaxies(redshift=loop,simulation='MR')
 		df = make_selection(df,redshift=loop)
 		DM = np.log10(df[df['Dust_Mass']>0.0]['Dust_Mass'])
 		
@@ -42,19 +43,15 @@ for loop in range(0,9):
 		np.savetxt('./binned_data/DMF_z'+str(loop)+'.txt',np.c_[bin_centers,hist])
 
 
-
-	plt.subplot(3,3,loop+1)
-	plt.xlim([6,10])
-	plt.ylim([-6,0])
+	ax[loop].set_xlim([6,10])
+	ax[loop].set_ylim([-6,0])
 	
-	plot_params(loop)
+	plot_params(ax[loop],loop, 'DMF','DMF')
 
-	plot_observations(loop,"DMF")
+	plot_observations(ax[loop],loop,"DMF")
 	
-	plt.plot(bin_centers,np.log10(hist),c='k',zorder=10,linewidth=2,label='L-Galaxies')
-	plt.text(8.5,-2,"z = "+str(loop),fontsize=16)
-	if loop==8:
-		plt.legend(loc='lower right',fontsize = 8)
+	ax[loop].plot(bin_centers,np.log10(hist),c='k',zorder=10,linewidth=2,label='L-Galaxies')
+	ax[loop].text(8.5,-2,"z = "+str(loop),fontsize=16)
 
 axes = fig.get_axes()
 for ax in axes:
