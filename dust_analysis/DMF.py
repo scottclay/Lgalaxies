@@ -43,8 +43,13 @@ for loop in range(0,9):
 		np.savetxt('./binned_data/DMF_z'+str(loop)+'.txt',np.c_[bin_centers,hist])
 
 
-	ax[loop].set_xlim([6,10])
-	ax[loop].set_ylim([-6,0])
+	ax[loop].set_xlim([6.,9.99])
+	ax[loop].set_ylim([-6.,-0.02])
+	#if loop == 0:
+	#	ax[loop].set_ylim([-6,0.05])
+	#if loop == 8:
+	#	ax[loop].set_xlim([6.0,10.0])	
+	
 	
 	plot_params(ax[loop],loop, 'DMF','DMF')
 
@@ -53,9 +58,7 @@ for loop in range(0,9):
 	ax[loop].plot(bin_centers,np.log10(hist),c='k',zorder=10,linewidth=2,label='L-Galaxies')
 	ax[loop].text(8.5,-2,"z = "+str(loop),fontsize=16)
 
-axes = fig.get_axes()
-for ax in axes:
-    [i.set_linewidth(2.1) for i in ax.spines.values()]
+	[i.set_linewidth(2.1) for i in ax[loop].spines.values()]
 
 pylab.savefig('./figs/DMF.png', bbox_inches=0)
 plt.close()

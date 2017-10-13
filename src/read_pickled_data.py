@@ -51,7 +51,7 @@ def produce_df(redshift=0, data_path = '/lustre/scratch/astro/sc558/Clay17_Sept/
     df['DustRate_SNIA'] = gals['DustRatesISM'][:,2]
     df['DustRate_GROW'] = gals['DustRatesISM'][:,3]
     df['DustRate_DEST'] = gals['DustRatesISM'][:,4]
-    
+        
     df['H']  = gals['ColdGas_elements'][:,0]
     df['He'] = gals['ColdGas_elements'][:,1]
     df['Cb'] = gals['ColdGas_elements'][:,2]

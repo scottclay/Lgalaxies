@@ -38,6 +38,9 @@ def plot_SM_DM(redshift_low, redshift_high, filename):
 		  
 		ax[loop].set_xlim([8,11.97])
 		ax[loop].set_ylim([0,9.98])
+		if loop == 8:
+			ax[loop].set_xlim([8,12])
+		
 		ax[loop].text(8.2,0.3,"z = "+str(loop), fontsize = 16)
 		
 		plot_params(ax[loop],loop,'SM','DM')
@@ -46,10 +49,8 @@ def plot_SM_DM(redshift_low, redshift_high, filename):
 		ax[loop].plot(bin_centres,per_50,c='k',zorder=10,linewidth=2,label='L-Galaxies')
 		ax[loop].plot(bin_centres,per_16,'k--',zorder=10,linewidth=2)
 		ax[loop].plot(bin_centres,per_84,'k--',zorder=10,linewidth=2)
-	
-	axes = fig.get_axes()
-	for ax in axes:
-		[i.set_linewidth(2.1) for i in ax.spines.values()]
+		
+		[i.set_linewidth(2.1) for i in ax[loop].spines.values()]
 
 	pylab.savefig('./figs/'+filename+'.png', bbox_inches=0)
 

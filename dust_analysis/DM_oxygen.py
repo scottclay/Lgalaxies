@@ -41,27 +41,21 @@ for loop in range(0,9):
 
 
 
-    ax[loop].set_xlim([6.,9.98])
+    ax[loop].set_xlim([6.,9.97])
     ax[loop].set_ylim([0,9.98])
-
+    if loop == 8:
+        ax[loop].set_xlim([6,10])
+            
     plot_params(ax[loop], loop,'O','DM')
-
-    #plot_observations(loop,"DTG_Oxy")
-    
-    #if loop == 0:
-    #    ax[0].scatter(RR_2015['Oxygen'], RR_2015['DM_1'], color='g')
 
     ax[loop].plot(bin_centres,per_50,c='k',zorder=10,linewidth=2,label='L-Galaxies')
     ax[loop].plot(bin_centres,per_16,'k--',zorder=10,linewidth=2)
     ax[loop].plot(bin_centres,per_84,'k--',zorder=10,linewidth=2)
     if loop == 0:
-    	#ax[loop].scatter(RR_2015['Oxygen'], RR_2015['DM_1'], color='g')
+        #ax[loop].scatter(RR_2015['Oxygen'], RR_2015['DM_1'], color='g')
         ax[loop].errorbar(RR_2015['Oxygen'], RR_2015['DM_1'], yerr = (RR_2015['DM_1_down'], RR_2015['DM_1_up']),color='g',label='Remy-Ruyer2015',fmt='.')
-
-
-axes = fig.get_axes()
-for ax in axes:
-    [i.set_linewidth(2.1) for i in ax.spines.values()]
+        ax[loop].legend(loc='lower right',fontsize = 8)
+    [i.set_linewidth(2.1) for i in ax[loop].spines.values()]
 
 pylab.savefig('./figs/DM_oxygen.png', bbox_inches=0)
 plt.close()

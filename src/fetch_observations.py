@@ -107,7 +107,7 @@ def plot_observations(ax,redshift,type):
 			ax.errorbar(VlahakisA_2005['DM'] ,np.log10(VlahakisA_2005['Phi']) ,yerr=(np.log10(VlahakisA_2005['Phi_up_err']/VlahakisA_2005['Phi']),np.log10(VlahakisA_2005['Phi_down_err']/VlahakisA_2005['Phi'])) ,color='g',label='VlahakisA+2005',fmt='o')
 			ax.errorbar(VlahakisB_2005['DM'] ,np.log10(VlahakisB_2005['Phi']) ,yerr=(np.log10(VlahakisB_2005['Phi_up_err']/VlahakisB_2005['Phi']),np.log10(VlahakisB_2005['Phi_down_err']/VlahakisB_2005['Phi'])) ,color='g',label='VlahakisB+2005',fmt='o')
 			ax.errorbar(Clemens_2013['DM'], Clemens_2013['Phi'], yerr = (Clemens_2013['Phi_down_err'],Clemens_2013['Phi_up_err']),color='b',label='Clemens+2013',fmt='o')    
-			ax.legend(loc='lower right',fontsize = 8)
+			ax.legend(loc='lower left',fontsize = 8)
 	elif type == "DTG_SM":
 		if(redshift == 0):
 			RR_DTG1B_err = 10**RR_2015['DTG_1B'] * np.sqrt( (RR_2015['DM_1_up']/RR_2015['DM_1'])**2 + (RR_2015['HI_err']/RR_2015['HI'])**2 )
