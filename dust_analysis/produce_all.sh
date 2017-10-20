@@ -13,3 +13,4 @@ python redshift_DMdensity.py
 python redshift_DRate.py
 python SM_DRate.py
 python SM_oxygen.py
+python first_gals.py

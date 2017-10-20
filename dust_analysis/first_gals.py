@@ -21,8 +21,8 @@ from fit_scatter import fit_median
 
 fig, axs = plt.subplots(nrows=2, ncols=2, sharex=False, sharey=False, figsize=(9,9))
 ax = axs.reshape(-1)
-fig.subplots_adjust(hspace=0.5)
-fig.subplots_adjust(wspace=0.5)
+fig.subplots_adjust(hspace=0.3)
+fig.subplots_adjust(wspace=0.3)
 
 dfs = []
 DR = []
@@ -32,6 +32,7 @@ z=[]
 for loop in range(9,14):
 
     df = fetch_lgalaxies(redshift=loop, data_path = '../prepare_output/',simulation='MR')
+    #df = fetch_lgalaxies(redshift=loop,simulation='MR')
     df = make_selection(df,redshift=loop)
     
     new_df = pd.DataFrame()
@@ -71,17 +72,41 @@ for loop, redshift in enumerate(list(range(9,14))):
 	ax[1].plot(bin_centres,per_84,c=colours[loop],linestyle='--',zorder=10,linewidth=2)
 	ax[1].legend()
 	
+	#ax[2+3]
 	
+	volume = (480.279/0.673)**3.0
 	z.append(redshift)
-	DR.append([df['DR_AGB'].sum(),df['DR_AGB'].sum(),df['DR_AGB'].sum(),df['DR_AGB'].sum(),df['DR_AGB'].sum(),df['SFR'].sum()])
-	DMdensity.append(df['DM'].sum())
-	
-volume = (480.279/0.673)**3.0
-ax[2].plot(z, np.log10([row[0] for row in DR]/volume), label='AGB')	
+	DR.append([np.log10(df['DR_AGB'].sum()/volume),np.log10(df['DR_SNII'].sum()/volume),np.log10(df['DR_SNIA'].sum()/volume),np.log10(df['DR_GROW'].sum()/volume),np.log10(df['DR_DEST'].sum()/volume),np.log10(df['SFR'].sum()/volume)])
+	DMdensity.append(np.log10(df['DM'].sum()/volume))
 	
 	
 	
 	
+ax[2].plot(z,[row[0] for row in DR], label='AGB',linewidth=2)	
+ax[2].plot(z,[row[1] for row in DR], label='SNII',linewidth=2)	
+ax[2].plot(z,[row[2] for row in DR], label='SNIA',linewidth=2)	
+ax[2].plot(z,[row[3] for row in DR], label='GROW',linewidth=2)	
+ax[2].plot(z,[row[4] for row in DR], label='DEST',linewidth=2)	
+ax[2].legend()
+
+ax[3].plot(z,DMdensity,linewidth=2)	
+
+ax[0].set_xlabel(r'log$_{10}$(M$_{*}$/M$_{\odot}$)', fontsize=18)
+ax[0].set_ylabel(r'log$_{10}$(M$_{\rm{D}}$/M$_{\odot}$)', fontsize=18)
+ax[1].set_xlabel(r'12 + log$_{10}$(O/H)', fontsize=18)
+ax[1].set_ylabel(r'log$_{10}$(M$_{\rm{D}}$/M$_{\odot}$)', fontsize=18)
+ax[2].set_xlabel(r'redshift', fontsize=18,labelpad=10)
+ax[2].set_ylabel(r'log$_{10}$(Cosmic dust rate Msol/yr/Mpc$^3$)', fontsize=18,labelpad=0)
+ax[3].set_xlabel(r'redshift', fontsize=18,labelpad=10)
+ax[3].set_ylabel(r'log$_{10}$(dust mass density Msol/Mpc$^3$)', fontsize=18,labelpad=0)
+
+
+
+for count in range(0,4):
+	ax[count].tick_params(axis='both', which='major', labelsize=12,width=2)
+	ax[count].tick_params(axis='both', which='minor', labelsize=12,width=2)
+	[i.set_linewidth(2.1) for i in ax[count].spines.values()]
+
 
 pylab.savefig('./figs/first_gals.png', bbox_inches=0)
 

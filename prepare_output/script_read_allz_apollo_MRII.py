@@ -1,0 +1,161 @@
+#=========================================================================
+#
+#  Script to read in L-galaxies snapshot data
+#
+#  To force a re-read of the data do Gal=None
+#
+#-------------------------------------------------------------------------
+
+# Imports
+# 
+import sys
+
+
+datadir   = '/lustre/scratch/astro/sc558/Clay17_Sept/MRII/'
+output_dir = '/lustre/scratch/astro/sc558/Clay17_Sept/MRII/Pickled/'
+
+#datadir   = '../../Hen15_Dustmodel/output/'
+#output_dir = './'
+
+
+#snapdir_058/SA_z0.00_100
+
+sys.path.insert(0,datadir)
+
+# Template structure for L-Galaxies data
+sys.path.append('../data/')
+sys.path.append('../src/')
+import snap_template   # structure temple for data
+import read_lgal       # function to read in data
+# 
+#-------------------------------------------------------------------------
+import time 
+start_all = time.time()
+# Parameters
+
+# Snaplist file
+#snaplist_file = '../MRPlancksnaplist.txt'
+
+
+file_prefix = {
+	0.00:"062",
+	1.04:"042",
+	2.07:"034",
+	3.11:"029",
+	3.95:"026",
+	5.03:"023",
+	5.92:"021",
+	6.97:"019",
+	8.22:"017",
+	8.93:"016",	
+	9.72:"015",	
+	10.57:"014",	
+	11.51:"013",	
+	12.53:"012",		
+	13.66:"011",
+	14.90:"010"
+	}
+
+min_redshift = 0.00
+max_redshift = 15.00
+
+# Define which files you want to read in
+#firstfile = 0
+#lastfile = 511
+
+desired_redshifts = {}
+for redshift in file_prefix.keys():
+	if redshift>=min_redshift and redshift <= max_redshift+0.5:
+		#print(redshift,file_prefix[redshift])
+		desired_redshifts.update({redshift:file_prefix[redshift]})
+
+print(desired_redshifts)
+
+
+for j in range(0,5):
+	if j == 0:
+		firstfile = 0
+		lastfile = 100
+	elif j==1:
+		firstfile = 101
+		lastfile = 200
+	elif j==2:
+		firstfile = 201
+		lastfile = 300
+	elif j==3:
+		firstfile = 301
+		lastfile = 400
+	elif j==4:
+		firstfile = 401
+		lastfile = 511
+
+	#firstfile = 5
+	#lastfile = 5
+		
+	for i, redshift in enumerate(sorted(desired_redshifts.keys()),int(round(min_redshift))):
+		print (i,redshift)
+		snapshot = desired_redshifts[redshift]
+		file_prefix = "SA_z"+str("%.2f" % redshift)
+		#output_file = "../data/MR/lgal_z"+str(i)+".pkl"
+		output_file = output_dir+"lgal_z"+str(i)+"_N"+str(j)
+		snapdir = datadir+"snapdir_"+snapshot
+		#snapdir = datadir
+		#print(i,snapshot, file_prefix, output_file)
+	
+
+		# Define what properties you want to read in
+		props = snap_template.properties_used
+
+		props['Type'] = True
+		props['ColdGas'] = True
+		props['StellarMass'] = True
+		props['BulgeMass'] = True
+		props['DiskMass'] = True
+		props['HotGas'] = True
+		props['ICM'] = True
+		props['MetalsColdGas'] = True
+		props['MetalsBulgeMass'] = True
+		props['MetalsDiskMass'] = True
+		props['MetalsHotGas'] = True
+		props['MetalsEjectedMass'] = True
+		props['MetalsICM'] = True
+		props['Sfr'] = True
+		props['SfrBulge'] = True
+		props['DiskMass_elements'] = True
+		props['BulgeMass_elements'] = True
+		props['ColdGas_elements'] = True
+		props['HotGas_elements'] = True
+		#props['DustMassISM'] = True
+		props['DustRatesISM'] = True
+		props['Dust_elements'] = True
+		props['Attenuation_Dust'] = True
+		props['Mag'] = True
+		props['MagDust'] = True
+		props['GasDiskRadius'] = True
+		# 
+		#-------------------------------------------------------------------------
+
+		# Working body of the program
+
+		# Read in galaxy output
+		(nTrees,nHalos,nTreeHalos,gals) = \
+			read_lgal.read_snap(snapdir,file_prefix,firstfile,lastfile,\
+									props,snap_template.struct_dtype)
+
+	
+		if str(sys.argv[1]) == 'MR': 
+			mass_limit = 10**8.5
+		elif str(sys.argv[1]) == 'MRII': 
+			mass_limit = 10**6.5
+		
+		gals_to_save =gals#[gals['StellarMass']*1.0E10/0.673>mass_limit]
+	
+	
+		import pickle as cPickle
+		fout = open(output_file+".pkl",'wb')
+		cPickle.dump(gals_to_save,fout,cPickle.HIGHEST_PROTOCOL)
+		fout.close()
+	
+
+
+
