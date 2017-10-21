@@ -41,12 +41,15 @@ for loop in range(0,9):
 
 
 
-    ax[loop].set_xlim([6.,9.97])
+    ax[loop].set_xlim([7.,9.97])
     ax[loop].set_ylim([0,9.98])
     if loop == 8:
-        ax[loop].set_xlim([6,10])
+        ax[loop].set_xlim([7,10])
             
     plot_params(ax[loop], loop,'O','DM')
+    
+    ax[loop].text(7.2,0.3,"z = "+str(loop), fontsize = 16)
+
 
     ax[loop].plot(bin_centres,per_50,c='k',zorder=10,linewidth=2,label='L-Galaxies')
     ax[loop].plot(bin_centres,per_16,'k--',zorder=10,linewidth=2)
@@ -57,7 +60,7 @@ for loop in range(0,9):
         ax[loop].legend(loc='lower right',fontsize = 8)
     [i.set_linewidth(2.1) for i in ax[loop].spines.values()]
 
-pylab.savefig('./figs/DM_oxygen.png', bbox_inches=0)
+pylab.savefig('./figs/DM_oxygen.eps', bbox_inches=0)
 plt.close()
     
 

@@ -90,6 +90,7 @@ def fetch_lgalaxies(redshift = 0, data_path = '/lustre/scratch/astro/sc558/Clay1
     
     if simulation=='MR':
         df   = produce_df(redshift=redshift, data_path = data_path + '/MR/Pickled/')
+        #df = df[df.SM>9.]
     elif simulation == 'MRII':
         df = produce_df(redshift=redshift, data_path = data_path + '/MRII/Pickled/')
     elif simulation =='both':
@@ -104,7 +105,7 @@ def make_selection(df,redshift=0):
     Hubble_time = 28.0/3*(1+(1+redshift)**2)*1.0E9 #years
     sSFR_cut = 1 / (3 * Hubble_time)
     
-    df_cut = df[( (df['Type']==0) & (sSFR > sSFR_cut) & (df['Dust_Mass']>0.0) )]#& (df['SM'] > 9.0) )]
+    df_cut = df[( (df['Type']==0) & (sSFR > sSFR_cut) & (df['Dust_Mass']>0.0) )]# & (df['SM'] > 9.0) )]
     #df_cut = df[df['Dust_Mass']>0.0]
     return df_cut
     

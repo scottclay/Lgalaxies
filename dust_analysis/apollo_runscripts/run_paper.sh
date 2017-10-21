@@ -1,14 +1,8 @@
 rm ~/Lgalaxies_Analysis/dust_analysis/logs/*
 qsub run_SM_DM.sh
-qsub run_DTG_Oxy.sh
-qsub run_DTG_SM.sh
-qsub run_DTM_Oxy.sh
-qsub run_DTM_SM.sh
-qsub run_SM_oxygen.sh
 qsub run_DMF.sh
 qsub run_redshift_DMdensity.sh
 qsub run_redshift_DRate.sh
 qsub run_SM_DRate.sh
-qsub run_SM_oxygen.sh
 qsub run_DM_oxygen.sh
 qsub first_gals.sh

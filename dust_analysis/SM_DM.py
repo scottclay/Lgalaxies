@@ -36,12 +36,12 @@ def plot_SM_DM(redshift_low, redshift_high, filename):
 		except IOError:
 			bin_centres,median,per_50,per_16,per_84,per_25,per_75,normalize = bin_data('SM','DM',ax,normalize,redshift,filename,nbins=30)
 		  
-		ax[loop].set_xlim([8,11.97])
+		ax[loop].set_xlim([9,11.98])
 		ax[loop].set_ylim([0,9.98])
 		if loop == 8:
-			ax[loop].set_xlim([8,12])
+			ax[loop].set_xlim([9,12])
 		
-		ax[loop].text(8.2,0.3,"z = "+str(loop), fontsize = 16)
+		ax[loop].text(9.2,0.3,"z = "+str(loop), fontsize = 16)
 		
 		plot_params(ax[loop],loop,'SM','DM')
 		plot_observations(ax[loop],loop,"SM_DM")
@@ -52,6 +52,6 @@ def plot_SM_DM(redshift_low, redshift_high, filename):
 		
 		[i.set_linewidth(2.1) for i in ax[loop].spines.values()]
 
-	pylab.savefig('./figs/'+filename+'.png', bbox_inches=0)
+	pylab.savefig('./figs/'+filename+'.eps', bbox_inches=0)
 
 plot_SM_DM(0,9,'SM_DM')

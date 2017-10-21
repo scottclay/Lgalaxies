@@ -32,8 +32,8 @@ z=[]
 for loop in range(9,14):
 
     df = fetch_lgalaxies(redshift=loop, data_path = '../prepare_output/',simulation='MR')
-    #df = fetch_lgalaxies(redshift=loop,simulation='MR')
-    df = make_selection(df,redshift=loop)
+    df = fetch_lgalaxies(redshift=loop,simulation='MR')
+    #df = make_selection(df,redshift=loop)
     
     new_df = pd.DataFrame()
     
@@ -85,8 +85,8 @@ for loop, redshift in enumerate(list(range(9,14))):
 ax[2].plot(z,[row[0] for row in DR], label='AGB',linewidth=2)	
 ax[2].plot(z,[row[1] for row in DR], label='SNII',linewidth=2)	
 ax[2].plot(z,[row[2] for row in DR], label='SNIA',linewidth=2)	
-ax[2].plot(z,[row[3] for row in DR], label='GROW',linewidth=2)	
-ax[2].plot(z,[row[4] for row in DR], label='DEST',linewidth=2)	
+ax[2].plot(z,[row[3] for row in DR], label='Grain Growth',linewidth=2)	
+ax[2].plot(z,[row[4] for row in DR], label='Destruction',linewidth=2)	
 ax[2].legend()
 
 ax[3].plot(z,DMdensity,linewidth=2)	
@@ -95,12 +95,10 @@ ax[0].set_xlabel(r'log$_{10}$(M$_{*}$/M$_{\odot}$)', fontsize=18)
 ax[0].set_ylabel(r'log$_{10}$(M$_{\rm{D}}$/M$_{\odot}$)', fontsize=18)
 ax[1].set_xlabel(r'12 + log$_{10}$(O/H)', fontsize=18)
 ax[1].set_ylabel(r'log$_{10}$(M$_{\rm{D}}$/M$_{\odot}$)', fontsize=18)
-ax[2].set_xlabel(r'redshift', fontsize=18,labelpad=10)
-ax[2].set_ylabel(r'log$_{10}$(Cosmic dust rate Msol/yr/Mpc$^3$)', fontsize=18,labelpad=0)
-ax[3].set_xlabel(r'redshift', fontsize=18,labelpad=10)
-ax[3].set_ylabel(r'log$_{10}$(dust mass density Msol/Mpc$^3$)', fontsize=18,labelpad=0)
-
-
+ax[2].set_xlabel(r'z', fontsize=18,labelpad=10)
+ax[2].set_ylabel(r'log$_{10}$($\phi_{DR}$) [M$_{\odot}$yr$^{-1}$Mpc$^{-3}$]', fontsize=18,labelpad=0)
+ax[3].set_xlabel(r'z', fontsize=18,labelpad=10)
+ax[3].set_ylabel(r'log$_{10}$($\rho_{DM}$)[M$_{\odot}$Mpc$^{-3}$]', fontsize=18,labelpad=0)
 
 for count in range(0,4):
 	ax[count].tick_params(axis='both', which='major', labelsize=12,width=2)
@@ -108,7 +106,7 @@ for count in range(0,4):
 	[i.set_linewidth(2.1) for i in ax[count].spines.values()]
 
 
-pylab.savefig('./figs/first_gals.png', bbox_inches=0)
+pylab.savefig('./figs/first_gals.eps', bbox_inches=0)
 
 
 

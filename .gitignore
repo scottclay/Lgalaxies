@@ -5,6 +5,7 @@ read_data_pandas_hdf5/peter_examples/*
 *.pyc
 *~
 *.png
+*.eps
 *.txt
 dust_analysis/logs/
 

@@ -17,9 +17,9 @@ from plot_params import plot_params
 from fit_scatter import fit_median
 
 
-def bin_data(var1,var2,ax,normalize,redshift,filename,nbins=10):
-    df = fetch_lgalaxies(redshift=redshift, data_path = '../prepare_output/',simulation='MR')
-    #df = fetch_lgalaxies(redshift=redshift,simulation='MR')
+def bin_data(var1,var2,ax,normalize,redshift,filename,nbins=10, sim = 'MR'):
+    #df = fetch_lgalaxies(redshift=redshift, data_path = '../prepare_output/',simulation=sim)
+    df = fetch_lgalaxies(redshift=redshift,simulation='MR')
     df = make_selection(df,redshift=redshift)
 
     x = df[var1]
@@ -35,7 +35,7 @@ def bin_data(var1,var2,ax,normalize,redshift,filename,nbins=10):
         hb = ax[redshift].hexbin(x,y,gridsize=150,bins='log',mincnt=5,cmap='gist_gray')
         min = hb.norm.vmin
         max = hb.norm.vmax
-        #normalize = matplotlib.colors.Normalize(vmin=min, vmax=max)
+        normalize = matplotlib.colors.Normalize(vmin=min, vmax=max)
         #print (normalize)
     else:
         ax[redshift].hexbin(x,y,gridsize=150,bins='log',mincnt=5,cmap='gist_gray')#,norm=normalize)

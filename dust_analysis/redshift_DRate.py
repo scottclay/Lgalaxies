@@ -39,8 +39,8 @@ except IOError:
 	DustRate_ALL  = []
 	SFR_density  = []
 	for loop in range(0,9):
-		df = fetch_lgalaxies(redshift=loop, data_path = '../prepare_output/',simulation='MR')
-		#df = fetch_lgalaxies(redshift=loop,simulation='MR')
+		#df = fetch_lgalaxies(redshift=loop, data_path = '../prepare_output/',simulation='MR')
+		df = fetch_lgalaxies(redshift=loop,simulation='MR')
 		df = make_selection(df,redshift=loop)
 	
 		SM = np.log10(df[df['Dust_Mass']>0.0]['StellarMass'])
@@ -69,9 +69,9 @@ except IOError:
 	np.savetxt('./binned_data/redshift_DRate_z.txt',np.c_[redshift, DustRate_AGB, DustRate_SNII, DustRate_SNIA, DustRate_GROW, DustRate_DEST, DustRate_ALL,SFR_density])
 
 fig = plt.figure(figsize=(7,7))
-plt.xlabel(r'redshift', fontsize=18,labelpad=10)
-plt.ylabel(r'log$_{10}$(Cosmic dust rate Msol/yr/Mpc$^3$)', fontsize=18,labelpad=0)
-plt.xlim(-1,10)
+plt.xlabel(r'z', fontsize=18,labelpad=10)
+plt.ylabel(r'log$_{10}$($\phi_{DR}$) [M$_{\odot}$yr$^{-1}$Mpc$^{-3}$]', fontsize=18,labelpad=0)
+plt.xlim(-0.2,9.0)
 
 plt.tick_params(axis='both', which='major', labelsize=12,width=2)
 plt.tick_params(axis='both', which='minor', labelsize=12,width=2)
@@ -90,6 +90,6 @@ axes = fig.get_axes()
 for ax in axes:
     [i.set_linewidth(2.1) for i in ax.spines.values()]
 
-pylab.savefig('./figs/redshift_DRate.png', bbox_inches=0)
+pylab.savefig('./figs/redshift_DRate.eps', bbox_inches=0)
 plt.close()
 

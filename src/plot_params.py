@@ -38,7 +38,7 @@ def plot_params(ax, redshift, x_axis = 'none', y_axis = 'none'):
 		if y_axis == "CG":
 			ax.set_ylabel(r'log$_{10}$(M$_{\rm{CG}}$/M$_{\odot}$)', fontsize=18)
 		if y_axis == "DRate":
-			ax.set_ylabel(r'Dust production rate (M$_{\odot}$yr$^{-1})$', fontsize=18)			
+			ax.set_ylabel(r'log$_{10}$($\phi_{DR}$) [M$_{\odot}$yr$^{-1}$Mpc$^{-3}$]', fontsize=18)
 		if x_axis == "DMF":
 			ax.set_ylabel(r'log$_{10}$($\Phi$)[Mpc$^{-3}$ dex$^{-1}$]', fontsize=18)
 	return

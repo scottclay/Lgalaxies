@@ -34,8 +34,8 @@ for loop in range(0,9):
     
     except IOError:
         print("Missing data - will create")
-        df = fetch_lgalaxies(redshift=loop, data_path = '../prepare_output/',simulation='MR')
-        #df = fetch_lgalaxies(redshift=loop,simulation='MR')
+        #df = fetch_lgalaxies(redshift=loop, data_path = '../prepare_output/',simulation='MR')
+        df = fetch_lgalaxies(redshift=loop,simulation='MR')
         df = make_selection(df,redshift=loop)
         
         SM = np.log10(df[df['Dust_Mass']>0.0]['StellarMass'])
@@ -69,13 +69,13 @@ for loop in range(0,9):
         np.savetxt('./binned_data/SM_DRate_DEST_'+str(loop)+'.txt',np.c_[DEST_bin_centres,DEST_median,DEST_50,DEST_16,DEST_84,DEST_25,DEST_75])
 
 
-    ax[loop].set_xlim([6.,11.94])
-    ax[loop].set_ylim([-10.,2.47])
+    ax[loop].set_xlim([9.,11.3])
+    ax[loop].set_ylim([-6.,2.0])
     
     if loop == 0:
-    	ax[loop].set_ylim([-10.,2.51])
+    	ax[loop].set_ylim([-6.,2.0])
     if loop == 8:
-        ax[loop].set_xlim([6.0,12.0])
+        ax[loop].set_xlim([9.0,11.3])
             
     plot_params(ax[loop], loop,'SM','DRate')
     #plot_observations(loop,"SM_DM")
@@ -84,8 +84,8 @@ for loop in range(0,9):
     ax[loop].plot(AGB_bin_centres,AGB_median,c='b',zorder=10,linewidth=2,label='AGB')
     ax[loop].plot(SNII_bin_centres,SNII_median,c='r',zorder=10,linewidth=2,label='SNII')
     ax[loop].plot(SNIA_bin_centres,SNIA_median,c='y',zorder=10,linewidth=2,label='SNIA')
-    ax[loop].plot(GROW_bin_centres,GROW_median,c='g',zorder=10,linewidth=2,label='GG')
-    ax[loop].plot(DEST_bin_centres,DEST_median,c='k',zorder=10,linewidth=2,label='DEST')
+    ax[loop].plot(GROW_bin_centres,GROW_median,c='g',zorder=10,linewidth=2,label='Grain Growth')
+    ax[loop].plot(DEST_bin_centres,DEST_median,c='k',zorder=10,linewidth=2,label='Destruction')
     
     ax[loop].plot(AGB_bin_centres,AGB_16,'b--',zorder=10,linewidth=2)
     ax[loop].plot(AGB_bin_centres,AGB_84,'b--',zorder=10,linewidth=2)
@@ -102,13 +102,13 @@ for loop in range(0,9):
     
     
     
-    ax[loop].text(7,1.0,"z = "+str(loop), fontsize = 16)
+    ax[loop].text(9.4,-5.5,"z = "+str(loop), fontsize = 16)
     if loop==8:
         ax[loop].legend(loc='lower right',fontsize = 8)
 
     [i.set_linewidth(2.1) for i in ax[loop].spines.values()]
 
-pylab.savefig('./figs/SM_DRate.png', bbox_inches=0)
+pylab.savefig('./figs/SM_DRate.eps', bbox_inches=0)
 plt.close()
     
 
