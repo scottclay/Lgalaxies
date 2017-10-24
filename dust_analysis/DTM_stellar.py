@@ -52,7 +52,7 @@ axes = fig.get_axes()
 for ax in axes:
     [i.set_linewidth(2.1) for i in ax.spines.values()]
 
-pylab.savefig('./figs/DTM_stellar.png', bbox_inches=0)
+pylab.savefig('./figs/DTM_stellar.eps', bbox_inches=0)
 plt.close()
     
 

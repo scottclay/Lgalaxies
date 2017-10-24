@@ -51,7 +51,7 @@ axes = fig.get_axes()
 for ax in axes:
     [i.set_linewidth(2.1) for i in ax.spines.values()]
 
-pylab.savefig('./figs/DTG_stellar.png', bbox_inches=0)
+pylab.savefig('./figs/DTG_stellar.eps', bbox_inches=0)
 plt.close()
     
 

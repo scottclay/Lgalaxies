@@ -16,6 +16,6 @@ module load python/3.4.3
 source /lustre/scratch/astro/sc558/my_python/bin/activate
 
 cd /home/s/sc/sc558/Lgalaxies_Analysis/dust_analysis/
-#$ -o /home/s/sc/sc558/Lgalaxies_Analysis/dust_analysis/logs/DTM_Oxy_plot.log
-#$ -e /home/s/sc/sc558/Lgalaxies_Analysis/dust_analysis/logs/DTM_Oxy_plot.elog
+#$ -o /home/s/sc/sc558/Lgalaxies_Analysis/dust_analysis/logs/first_gals.log
+#$ -e /home/s/sc/sc558/Lgalaxies_Analysis/dust_analysis/logs/first_gals.elog
 python first_gals.py
