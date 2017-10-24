@@ -31,9 +31,9 @@ z=[]
 
 for loop in range(9,14):
 
-    df = fetch_lgalaxies(redshift=loop, data_path = '../prepare_output/',simulation='MR')
+    #df = fetch_lgalaxies(redshift=loop, data_path = '../prepare_output/',simulation='MR')
     df = fetch_lgalaxies(redshift=loop,simulation='MR')
-    #df = make_selection(df,redshift=loop)
+    df = make_selection(df,redshift=loop)
     
     new_df = pd.DataFrame()
     
