@@ -11,4 +11,4 @@ qsub run_redshift_DRate.sh
 qsub run_SM_DRate.sh
 qsub run_SM_oxygen.sh
 qsub run_DM_oxygen.sh
-qsub first_gals.sh
+qsub run_first_gals.sh
