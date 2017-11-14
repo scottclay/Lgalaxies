@@ -18,8 +18,8 @@ from fit_scatter import fit_median
 
 
 def bin_data(var1,var2,ax,normalize,redshift,filename,nbins=10, sim = 'MR'):
-    #df = fetch_lgalaxies(redshift=redshift, data_path = '../prepare_output/',simulation=sim)
-    df = fetch_lgalaxies(redshift=redshift,simulation='MR')
+    df = fetch_lgalaxies(redshift=redshift, data_path = '../prepare_output/',simulation=sim)
+    #df = fetch_lgalaxies(redshift=redshift,simulation='MR')
     df = make_selection(df,redshift=redshift)
 
     x = df[var1]

@@ -7,27 +7,36 @@ import pandas as pd
 
 def read_pickled_data(redshift=0, data_path = '/lustre/scratch/astro/sc558/Clay17_Sept/MR/Pickled/'):
 
-    file_N0 = open(data_path +'lgal_z'+str(redshift)+'_N0.pkl','rb')
-    gals_N0 = cPickle.load(file_N0)
-    file_N0.close()
+    try:
+        file_N0 = open(data_path +'lgal_z'+str(redshift)+'_N0.pkl','rb')
+        gals_N0 = cPickle.load(file_N0)
+        file_N0.close()
 
-    file_N1 = open(data_path +'lgal_z'+str(redshift)+'_N1.pkl','rb')
-    gals_N1 = cPickle.load(file_N1)
-    file_N1.close()
+        file_N1 = open(data_path +'lgal_z'+str(redshift)+'_N1.pkl','rb')
+        gals_N1 = cPickle.load(file_N1)
+        file_N1.close()
 
-    file_N2 = open(data_path +'lgal_z'+str(redshift)+'_N2.pkl','rb')
-    gals_N2 = cPickle.load(file_N2)
-    file_N2.close()
+        file_N2 = open(data_path +'lgal_z'+str(redshift)+'_N2.pkl','rb')
+        gals_N2 = cPickle.load(file_N2)
+        file_N2.close()
 
-    file_N3 = open(data_path +'lgal_z'+str(redshift)+'_N3.pkl','rb')
-    gals_N3 = cPickle.load(file_N3)
-    file_N3.close()
+        file_N3 = open(data_path +'lgal_z'+str(redshift)+'_N3.pkl','rb')
+        gals_N3 = cPickle.load(file_N3)
+        file_N3.close()
 
-    file_N4 = open(data_path +'lgal_z'+str(redshift)+'_N4.pkl','rb')
-    gals_N4 = cPickle.load(file_N4)
-    file_N4.close()
+        file_N4 = open(data_path +'lgal_z'+str(redshift)+'_N4.pkl','rb')
+        gals_N4 = cPickle.load(file_N4)
+        file_N4.close()
+    
+        gals = np.hstack((gals_N0, gals_N1, gals_N2, gals_N3, gals_N4))
+    
+    except:
+        file_N0 = open(data_path +'lgal_z'+str(redshift)+'_N0.pkl','rb')
+        gals_N0 = cPickle.load(file_N0)
+        file_N0.close()
 
-    gals = np.hstack((gals_N0, gals_N1, gals_N2, gals_N3, gals_N4))
+        gals = gals_N0
+    
     
     return gals
 
@@ -121,6 +130,12 @@ def make_selection(df,redshift=0):
 
 
 #df = fetch_lgalaxies(redshift = 0, data_path = '../prepare_output/',simulation='MR')
+#df = make_selection(df,redshift=0)
+#print(df['Dust_Mass'].head(50))
+#print(df.DM.head(50))
+
+
+
 #print(df['O'].min())
 #print(df['O_Dust'].min())
 #print( (df['O'] + df['O_Dust']).min())
