@@ -106,7 +106,7 @@ for i, redshift in enumerate(sorted(desired_redshifts.keys()),int(round(min_reds
 	#props['DustMassISM'] = True
 	props['DustRatesISM'] = True
 	props['Dust_elements'] = True
-	props['Attenuation_Dust'] = True
+	#props['Attenuation_Dust'] = True
 	props['Mag'] = True
 	props['MagDust'] = True
 	props['GasDiskRadius'] = True
