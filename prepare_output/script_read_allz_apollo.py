@@ -11,11 +11,11 @@
 import sys
 
 if str(sys.argv[1]) == 'MR': 
-	datadir   = '/lustre/scratch/astro/sc558/Clay17_Sept/MR/'
-	output_dir = '/lustre/scratch/astro/sc558/Clay17_Sept/MR/Pickled/'
+	datadir   = '/lustre/scratch/astro/sc558/Clay2018/MR/'
+	output_dir = '/lustre/scratch/astro/sc558/Clay2018/MR/Pickled/'
 elif str(sys.argv[1]) == 'MRII': 
-	datadir   = '/lustre/scratch/astro/sc558/Clay17_Sept/MRII/'
-	output_dir = '/lustre/scratch/astro/sc558/Clay17_Sept/MRII/Pickled/'
+	datadir   = '/lustre/scratch/astro/sc558/Clay2018/MRII/'
+	output_dir = '/lustre/scratch/astro/sc558/Clay2018/MRII/Pickled/'
 
 
 #snapdir_058/SA_z0.00_100

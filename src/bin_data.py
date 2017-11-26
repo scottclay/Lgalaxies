@@ -17,8 +17,8 @@ from plot_params import plot_params
 from fit_scatter import fit_median
 
 def get_data_dir():
-    #data_path = '/lustre/scratch/astro/sc558/Clay17_Sept' #apollo
-    data_path = '../prepare_output/' #local
+    data_path = '/lustre/scratch/astro/sc558/Clay2018' #apollo
+    #data_path = '../prepare_output/' #local
     return data_path
 
 
