@@ -46,11 +46,11 @@ Clay2018 (this can be named anything)
 
 You should first edit the file path in the get_data_dir function in ```/src/bin_data.py``` to match that of the top output data directory (in the case above, that would be ```Clay2018``` (don't include MR or MRII or pickled in this directory as the pipeline can be used to call MR or MRII or both itself). 
 
-* Change to the ```/prepare_output/``` subdirectory
-* ```python script_read_allz_local.py MR```
-* Change to the ```/dust_analysis/``` subdirectory
-* ```python SM_DM.py``` will output the SM_DM.eps to ```/dust_analysis/figs/``` and the binned data to ```/dust_analysis/binned_data/```
-* Alternatively, ```./produce_all.sh``` will create all plots
+* Each plot has its own script within the ```/dust_analysis/``` subdirectory
+* For example - running ```python SM_DM.py``` will output the SM_DM.eps to ```/dust_analysis/figs/``` and the binned data to ```/dust_analysis/binned_data/```
+* Alternatively, running ```./produce_all.sh``` will create all plots
+
+As many of these plots require reading in data at 9 redshifts, you may prefer to send these plotting scripts to apollo. You can find submission scripts for all the plots in ```/dust_analysis/apollo_runscripts/```, or alternatively to submit all plots to apollo ```qsub run_all.sh```
 
 
  
