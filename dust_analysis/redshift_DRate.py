@@ -18,7 +18,7 @@ from read_pickled_data import fetch_lgalaxies
 from read_pickled_data import make_selection
 from plot_params import plot_params
 from fit_scatter import fit_median
-
+from bin_data import get_data_dir
 
 #fig, axs = plt.subplots(nrows=3, ncols=3, sharex=True, sharey=True, figsize=(9,9))
 #fig.subplots_adjust(hspace=0)
@@ -26,47 +26,47 @@ from fit_scatter import fit_median
 
 
 try: 
-	redshift, DustRate_AGB, DustRate_SNII, DustRate_SNIA, DustRate_GROW, DustRate_DEST, DustRate_ALL, SFR_density = np.loadtxt('./binned_data/redshift_DRate.txt',unpack=True,comments='#')
+    redshift, DustRate_AGB, DustRate_SNII, DustRate_SNIA, DustRate_GROW, DustRate_DEST, DustRate_ALL, SFR_density = np.loadtxt('./binned_data/redshift_DRate.txt',unpack=True,comments='#')
 
 except IOError:
-	print("Missing data - will create")
-	redshift      = []
-	DustRate_AGB  = []
-	DustRate_SNII = []
-	DustRate_SNIA = []
-	DustRate_GROW = []
-	DustRate_DEST = []
-	DustRate_ALL  = []
-	SFR_density  = []
-	for loop in range(0,9):
-		#df = fetch_lgalaxies(redshift=loop, data_path = '../prepare_output/',simulation='MR')
-		df = fetch_lgalaxies(redshift=loop,simulation='MR')
-		df = make_selection(df,redshift=loop)
-	
-		SM = np.log10(df[df['Dust_Mass']>0.0]['StellarMass'])
-		
-		SFR = (df[df['Dust_Mass']>0.0]['Sfr'].sum())
-	
-		AGB_DustRate  = (df[df['Dust_Mass']>0.0]['DustRate_AGB'].sum())
-		SNII_DustRate = (df[df['Dust_Mass']>0.0]['DustRate_SNII'].sum())
-		SNIA_DustRate = (df[df['Dust_Mass']>0.0]['DustRate_SNIA'].sum())
-		GROW_DustRate = (df[df['Dust_Mass']>0.0]['DustRate_GROW'].sum())
-		DEST_DustRate = (df[df['Dust_Mass']>0.0]['DustRate_DEST'].sum())
-	
-		ALL_DustRate = AGB_DustRate + SNII_DustRate + SNIA_DustRate + GROW_DustRate - DEST_DustRate 
-	
-		volume = (480.279/0.673)**3.0
+    print("Missing data - will create")
+    redshift      = []
+    DustRate_AGB  = []
+    DustRate_SNII = []
+    DustRate_SNIA = []
+    DustRate_GROW = []
+    DustRate_DEST = []
+    DustRate_ALL  = []
+    SFR_density  = []
+    for loop in range(0,9):
+        data_path = get_data_dir()
+        df = fetch_lgalaxies(redshift=loop, data_path = data_path, simulation='MR')
+        df = make_selection(df,redshift=loop)
+    
+        SM = np.log10(df[df['Dust_Mass']>0.0]['StellarMass'])
+        
+        SFR = (df[df['Dust_Mass']>0.0]['Sfr'].sum())
+    
+        AGB_DustRate  = (df[df['Dust_Mass']>0.0]['DustRate_AGB'].sum())
+        SNII_DustRate = (df[df['Dust_Mass']>0.0]['DustRate_SNII'].sum())
+        SNIA_DustRate = (df[df['Dust_Mass']>0.0]['DustRate_SNIA'].sum())
+        GROW_DustRate = (df[df['Dust_Mass']>0.0]['DustRate_GROW'].sum())
+        DEST_DustRate = (df[df['Dust_Mass']>0.0]['DustRate_DEST'].sum())
+    
+        ALL_DustRate = AGB_DustRate + SNII_DustRate + SNIA_DustRate + GROW_DustRate - DEST_DustRate 
+    
+        volume = (480.279/0.673)**3.0
 
-		redshift.append(loop)
-		DustRate_AGB.append(np.log10(AGB_DustRate/volume))
-		DustRate_SNII.append(np.log10(SNII_DustRate/volume))
-		DustRate_SNIA.append(np.log10(SNIA_DustRate/volume))
-		DustRate_GROW.append(np.log10(GROW_DustRate/volume))
-		DustRate_DEST.append(np.log10(DEST_DustRate/volume))
-		DustRate_ALL.append(np.log10(ALL_DustRate/volume))
-		SFR_density.append(np.log10(SFR/volume))
+        redshift.append(loop)
+        DustRate_AGB.append(np.log10(AGB_DustRate/volume))
+        DustRate_SNII.append(np.log10(SNII_DustRate/volume))
+        DustRate_SNIA.append(np.log10(SNIA_DustRate/volume))
+        DustRate_GROW.append(np.log10(GROW_DustRate/volume))
+        DustRate_DEST.append(np.log10(DEST_DustRate/volume))
+        DustRate_ALL.append(np.log10(ALL_DustRate/volume))
+        SFR_density.append(np.log10(SFR/volume))
 
-	np.savetxt('./binned_data/redshift_DRate_z.txt',np.c_[redshift, DustRate_AGB, DustRate_SNII, DustRate_SNIA, DustRate_GROW, DustRate_DEST, DustRate_ALL,SFR_density])
+    np.savetxt('./binned_data/redshift_DRate_z.txt',np.c_[redshift, DustRate_AGB, DustRate_SNII, DustRate_SNIA, DustRate_GROW, DustRate_DEST, DustRate_ALL,SFR_density])
 
 fig = plt.figure(figsize=(7,7))
 plt.xlabel(r'z', fontsize=18,labelpad=10)

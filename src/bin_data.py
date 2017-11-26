@@ -16,10 +16,15 @@ from read_pickled_data import make_selection
 from plot_params import plot_params
 from fit_scatter import fit_median
 
+def get_data_dir():
+    #data_path = '/lustre/scratch/astro/sc558/Clay17_Sept' #apollo
+    data_path = '../prepare_output/' #local
+    return data_path
+
 
 def bin_data(var1,var2,ax,normalize,redshift,filename,nbins=10, sim = 'MR'):
-    df = fetch_lgalaxies(redshift=redshift, data_path = '../prepare_output/',simulation=sim)
-    #df = fetch_lgalaxies(redshift=redshift,simulation='MR')
+    data_path = get_data_dir()
+    df = fetch_lgalaxies(redshift=redshift, data_path = data_path,simulation=sim)
     df = make_selection(df,redshift=redshift)
 
     x = df[var1]

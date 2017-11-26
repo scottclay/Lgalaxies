@@ -18,7 +18,7 @@ from read_pickled_data import fetch_lgalaxies
 from read_pickled_data import make_selection
 from plot_params import plot_params
 from fit_scatter import fit_median
-
+from bin_data import get_data_dir
 
 #fig, axs = plt.subplots(nrows=3, ncols=3, sharex=True, sharey=True, figsize=(9,9))
 #fig.subplots_adjust(hspace=0)
@@ -26,28 +26,28 @@ from fit_scatter import fit_median
 
 
 try: 
-	redshift, DM_density = np.loadtxt('./binned_data/redshift_DMdensity.txt',unpack=True,comments='#')
+    redshift, DM_density = np.loadtxt('./binned_data/redshift_DMdensity.txt',unpack=True,comments='#')
 
 except IOError:
-	print("Missing data - will create")
-	redshift      = []
-	DM_density  = []
-	
-	for loop in range(0,9):
-		#df = fetch_lgalaxies(redshift=loop, data_path = '../prepare_output/',simulation='MR')
-		df = fetch_lgalaxies(redshift=loop,simulation='MR')
-		df = make_selection(df,redshift=loop)
-	
-		SM = np.log10(df[df['Dust_Mass']>0.0]['StellarMass'])
-	
-		DM  = (df[df['Dust_Mass']>0.0]['Dust_Mass'].sum())
+    print("Missing data - will create")
+    redshift      = []
+    DM_density  = []
+    
+    for loop in range(0,9):
+        data_path = get_data_dir()
+        df = fetch_lgalaxies(redshift=loop, data_path = data_path, simulation='MR')
+        df = make_selection(df,redshift=loop)
+    
+        SM = np.log10(df[df['Dust_Mass']>0.0]['StellarMass'])
+    
+        DM  = (df[df['Dust_Mass']>0.0]['Dust_Mass'].sum())
 
-		volume = (480.279/0.673)**3.0
+        volume = (480.279/0.673)**3.0
 
-		redshift.append(loop)
-		DM_density.append(np.log10(DM/volume))
+        redshift.append(loop)
+        DM_density.append(np.log10(DM/volume))
 
-	np.savetxt('./binned_data/redshift_DMdensity.txt',np.c_[redshift, DM_density])
+    np.savetxt('./binned_data/redshift_DMdensity.txt',np.c_[redshift, DM_density])
 
 fig = plt.figure(figsize=(7,7))
 plt.xlabel(r'z', fontsize=18,labelpad=10)
